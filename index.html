@@ -749,9 +749,20 @@ function buildSummary(rows){
     }
   });
 
+  // Use latest date in dataset as reference (not today)
+  // so weekly/monthly/yearly is relative to your actual data
+  const allDatesRef=rows.filter(r=>r.date).map(r=>r.date).sort((a,b)=>b-a);
+  const latestDate=allDatesRef[0]||new Date();
+
   function topForDays(days){
-    const cut=new Date();cut.setDate(cut.getDate()-days);
-    const c={};rows.forEach(r=>{if(r.date&&r.date>=cut)c[r.designer||'?']=(c[r.designer||'?']||0)+1;});
+    const cut=new Date(latestDate);cut.setDate(cut.getDate()-days);
+    const c={};
+    rows.forEach(r=>{
+      if(r.date&&r.date>=cut){
+        const d=r.designer||'?';
+        c[d]=(c[d]||0)+(r.images||1);
+      }
+    });
     const t=Object.entries(c).sort((a,b)=>b[1]-a[1])[0];
     return t?{name:t[0],count:t[1]}:{name:'—',count:0};
   }
@@ -762,10 +773,10 @@ function buildSummary(rows){
     const dates=dr.filter(r=>r.date).map(r=>r.date).sort((a,b)=>a-b);
     const activeDays=new Set(dr.filter(r=>r.date).map(r=>fmtISO(r.date))).size;
     const avg=activeDays>0?(dCounts[d]/activeDays).toFixed(1):0;
-    const cut7=new Date();cut7.setDate(cut7.getDate()-7);
-    const cut30=new Date();cut30.setDate(cut30.getDate()-30);
-    const week=dr.filter(r=>r.date&&r.date>=cut7).length;
-    const month=dr.filter(r=>r.date&&r.date>=cut30).length;
+    const cut7=new Date(latestDate);cut7.setDate(cut7.getDate()-7);
+    const cut30=new Date(latestDate);cut30.setDate(cut30.getDate()-30);
+    const week=dr.filter(r=>r.date&&r.date>=cut7).reduce((s,r)=>s+(r.images||1),0);
+    const month=dr.filter(r=>r.date&&r.date>=cut30).reduce((s,r)=>s+(r.images||1),0);
     const topBrand=Object.entries(dBrand[d]||{}).sort((a,b)=>b[1]-a[1])[0];
     const dDayMap={};dr.forEach(r=>{if(r.date){const k=fmtISO(r.date);dDayMap[k]=(dDayMap[k]||0)+1;}});
     const bestDay=Object.entries(dDayMap).sort((a,b)=>b[1]-a[1])[0];
@@ -781,7 +792,8 @@ function buildSummary(rows){
     topWeek:topForDays(7),topMonth:topForDays(30),topYear:topForDays(365),
     totalDesigners:Object.keys(dCounts).length,weeklyMap,monthlyMap,
     recordDay:Object.values(dayMap).sort((a,b)=>b.count-a.count)[0]||null,
-    allDates,firstDate:allDates[0]||null,lastDate:allDates[allDates.length-1]||null
+    allDates,firstDate:allDates[0]||null,lastDate:allDates[allDates.length-1]||null,
+    latestDate
   };
 }
 
@@ -793,10 +805,20 @@ function weekLabel(d){const t=new Date(d);t.setDate(t.getDate()-t.getDay());retu
 function renderDashboard(){
   const s=buildSummary(visibleRows);
   // Hero
+  // Show period label relative to latest data date
+  const ld=s.latestDate||new Date();
+  const cut7=new Date(ld);cut7.setDate(cut7.getDate()-7);
+  const cut30=new Date(ld);cut30.setDate(cut30.getDate()-30);
+  const cut365=new Date(ld);cut365.setDate(cut365.getDate()-365);
+  const periodLabels={
+    Week:  fmtS(cut7)+' → '+fmtS(ld),
+    Month: fmtS(cut30)+' → '+fmtS(ld),
+    Year:  fmtS(cut365)+' → '+fmtS(ld)
+  };
   ['Week','Month','Year'].forEach(p=>{
     const d=s['top'+p];
     document.getElementById('top'+p+'Name').textContent=d.name;
-    document.getElementById('top'+p+'Count').textContent=d.count?d.count.toLocaleString()+' products':'— products';
+    document.getElementById('top'+p+'Count').textContent=d.count?d.count.toLocaleString()+' images · '+periodLabels[p]:'— (no data in period)';
     document.getElementById('top'+p+'Av').textContent=d.name!=='—'?initials(d.name):'—';
   });
   document.getElementById('kpiTotal').textContent=s.totalRows.toLocaleString();
