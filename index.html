@@ -395,8 +395,11 @@ canvas{width:100%!important;max-height:200px!important;}
           <th onclick="sortTable('designer')">Designer ⇅</th>
           <th onclick="sortTable('product')">Product (APS) ⇅</th>
           <th>ASIN</th><th>EAN</th><th>Brand</th>
+          <th onclick="sortTable('images')">No. of Images ⇅</th>
           <th onclick="sortTable('status')">Status ⇅</th>
-          <th onclick="sortTable('date')">Date ⇅</th>
+          <th onclick="sortTable('date')">Date Sending ⇅</th>
+          <th>Photos Approved By</th>
+          <th>Listing Done By</th>
         </tr></thead>
         <tbody id="detailTableBody"><tr><td colspan="7" style="text-align:center;color:var(--muted);padding:28px">Loading Google Sheets data…</td></tr></tbody>
       </table></div>
@@ -500,20 +503,30 @@ canvas{width:100%!important;max-height:200px!important;}
 ════════════════════════════════════════════ */
 const GS_API_KEY  = 'AIzaSyBxdLYQlt8rN6zuTxpebOMF60z82KXmKlY';
 const GS_SHEET_ID = '1m5KpalxI7spitUPGFN5LgSz-Go8vKkifaNfzx2UAOrE';
-const GS_RANGE    = 'Sheet1';   // change to your sheet tab name if different
+const GS_RANGE    = 'plantex';  // your sheet tab name
 const GS_REFRESH_MINUTES = 5;  // auto-refresh interval
 
 /* ════════════════════════════════════════════
-   GLOBALS
+   GLOBALS — column mapping matches your sheet:
+   No | Brand | Product Name | ASIN | EAN | APS |
+   Designer | Date sending | No of images | Status |
+   Photos Approved by | Listing done by |
+   Date of listing | All photo upload by |
+   Remark of Listing team | Date of all photo uploading |
+   Pending PHOTO LINK
 ════════════════════════════════════════════ */
 const ALIASES = {
-  designer:['designer','design','name'],
-  product: ['aps','product name','product','task','item','title'],
-  asin:    ['asin'],
-  ean:     ['ean'],
-  brand:   ['brand'],
-  status:  ['status','bot status'],
-  date:    ['date of listing','date sending','date sent','date','sending date','date of all photo uploading','listing date']
+  designer: ['designer'],
+  product:  ['aps','product name'],
+  asin:     ['asin'],
+  ean:      ['ean'],
+  brand:    ['brand'],
+  status:   ['status'],
+  date:     ['date sending','date of listing','date of all photo uploading'],
+  images:   ['no of images','no of images','images'],
+  photos:   ['photos approved by'],
+  listing:  ['listing done by'],
+  remark:   ['remark of listing team']
 };
 const COLORS=['#6366f1','#06b6d4','#10b981','#f59e0b','#f43f5e','#a855f7','#ec4899','#14b8a6','#f97316','#8b5cf6','#22d3ee','#84cc16'];
 
@@ -650,13 +663,17 @@ function parseRows(rows){
     const rec={};
     headers.forEach((h,i)=>rec[h]=Array.isArray(row)?(row[i]??''):'');
     return{
-      designer:String(getVal(rec,ALIASES.designer)).trim(),
-      product: String(getVal(rec,ALIASES.product)).trim(),
-      asin:    String(getVal(rec,ALIASES.asin)).trim(),
-      ean:     String(getVal(rec,ALIASES.ean)).trim(),
-      brand:   String(getVal(rec,ALIASES.brand)).trim(),
-      status:  String(getVal(rec,ALIASES.status)).trim(),
-      date:    parseDate(getVal(rec,ALIASES.date))
+      designer: String(getVal(rec,ALIASES.designer)).trim(),
+      product:  String(getVal(rec,ALIASES.product)).trim(),
+      asin:     String(getVal(rec,ALIASES.asin)).trim(),
+      ean:      String(getVal(rec,ALIASES.ean)).trim(),
+      brand:    String(getVal(rec,ALIASES.brand)).trim(),
+      status:   String(getVal(rec,ALIASES.status)).trim(),
+      date:     parseDate(getVal(rec,ALIASES.date)),
+      images:   parseFloat(getVal(rec,ALIASES.images))||1,
+      photos:   String(getVal(rec,ALIASES.photos)).trim(),
+      listing:  String(getVal(rec,ALIASES.listing)).trim(),
+      remark:   String(getVal(rec,ALIASES.remark)).trim()
     };
   }).filter(r=>r.designer||r.product);
 
@@ -712,22 +729,23 @@ function buildSummary(rows){
   const dCounts={},dProducts={},dBrand={},statusCounts={},brandCounts={},weeklyMap={},monthlyMap={},dayMap={};
   rows.forEach(r=>{
     const d=r.designer||'Unknown';
-    dCounts[d]=(dCounts[d]||0)+1;
+    const imgs=r.images||1;
+    dCounts[d]=(dCounts[d]||0)+imgs;
     if(!dProducts[d]) dProducts[d]=[];
     dProducts[d].push(r);
     const b=r.brand||'Unknown';
-    brandCounts[b]=(brandCounts[b]||0)+1;
+    brandCounts[b]=(brandCounts[b]||0)+imgs;
     if(!dBrand[d]) dBrand[d]={};
-    dBrand[d][b]=(dBrand[d][b]||0)+1;
+    dBrand[d][b]=(dBrand[d][b]||0)+imgs;
     if(r.status) statusCounts[r.status]=(statusCounts[r.status]||0)+1;
     if(r.date){
       const wk=weekLabel(r.date);
       const mo=r.date.toLocaleDateString('en-GB',{month:'short',year:'numeric'});
-      weeklyMap[wk]=(weeklyMap[wk]||0)+1;
-      monthlyMap[mo]=(monthlyMap[mo]||0)+1;
+      weeklyMap[wk]=(weeklyMap[wk]||0)+imgs;
+      monthlyMap[mo]=(monthlyMap[mo]||0)+imgs;
       const key=d+'|'+fmtISO(r.date);
       if(!dayMap[key]) dayMap[key]={designer:d,date:r.date,count:0,product:r.product,brand:r.brand};
-      dayMap[key].count++;
+      dayMap[key].count+=imgs;
     }
   });
 
@@ -924,15 +942,18 @@ function renderDetailTable(s){
     return sortDir*String(va).localeCompare(String(vb));
   }).slice(0,300);
   document.getElementById('tableCount').textContent=`Showing ${Math.min(visibleRows.length,300)} of ${visibleRows.length.toLocaleString()} records`;
-  if(!show.length){el.innerHTML='<tr><td colspan="7" style="text-align:center;color:var(--muted);padding:28px">No records.</td></tr>';return;}
-  el.innerHTML=show.map(r=>`<tr onclick="selectDesigner('${r.designer.replace(/'/g,"\\'")}')">
+   if(!show.length){el.innerHTML='<tr><td colspan="10" style="text-align:center;color:var(--muted);padding:28px">No records.</td></tr>';return;}
+   el.innerHTML=show.map(r=>`<tr onclick="selectDesigner('${r.designer.replace(/'/g,"\\'")}')"> 
     <td style="color:${colorFor(r.designer||'')};font-weight:600">${r.designer||'—'}</td>
     <td style="max-width:200px;overflow:hidden;text-overflow:ellipsis">${r.product||'—'}</td>
     <td style="font-family:var(--mono);font-size:.72rem">${r.asin||'—'}</td>
     <td style="font-family:var(--mono);font-size:.72rem">${r.ean||'—'}</td>
     <td>${r.brand||'—'}</td>
+    <td style="font-family:var(--mono);font-weight:700;color:var(--cyan);text-align:center">${r.images||'—'}</td>
     <td>${r.status?`<span class="sp ${spClass(r.status)}">${r.status}</span>`:'—'}</td>
     <td style="font-size:.76rem;color:var(--muted2)">${fmtD(r.date)}</td>
+    <td style="font-size:.76rem;color:var(--muted2)">${r.photos||'—'}</td>
+    <td style="font-size:.76rem;color:var(--muted2)">${r.listing||'—'}</td>
   </tr>`).join('');
 }
 
