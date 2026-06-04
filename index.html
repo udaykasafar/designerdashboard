@@ -7,37 +7,15 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
-/* ═══════════════════════════════════════════════════
-   DESIGN TOKENS
-═══════════════════════════════════════════════════ */
-:root {
-  --bg:        #080b14;
-  --bg2:       #0d1120;
-  --bg3:       #111827;
-  --card:      rgba(17,24,39,0.95);
-  --card2:     rgba(22,30,50,0.90);
-  --border:    rgba(255,255,255,0.07);
-  --border2:   rgba(255,255,255,0.12);
-  --text:      #e8eaf2;
-  --muted:     #64748b;
-  --muted2:    #94a3b8;
-  --accent:    #6366f1;
-  --accent2:   #818cf8;
-  --cyan:      #06b6d4;
-  --green:     #10b981;
-  --amber:     #f59e0b;
-  --red:       #f43f5e;
-  --purple:    #a855f7;
-  --gold:      #fbbf24;
-  --font:      'Outfit', sans-serif;
-  --mono:      'JetBrains Mono', monospace;
-  --r:         16px;
-  --r2:        12px;
-  --shadow:    0 20px 60px rgba(0,0,0,0.5);
-  --shadow2:   0 4px 20px rgba(0,0,0,0.3);
-  --glow-a:    0 0 30px rgba(99,102,241,0.15);
-  --glow-g:    0 0 30px rgba(16,185,129,0.15);
-  --glow-r:    0 0 30px rgba(244,63,94,0.15);
+:root{
+  --bg:#080b14;--bg2:#0d1120;--bg3:#111827;
+  --card:rgba(17,24,39,0.95);--card2:rgba(22,30,50,0.90);
+  --border:rgba(255,255,255,0.07);--border2:rgba(255,255,255,0.12);
+  --text:#e8eaf2;--muted:#64748b;--muted2:#94a3b8;
+  --accent:#6366f1;--accent2:#818cf8;--cyan:#06b6d4;
+  --green:#10b981;--amber:#f59e0b;--red:#f43f5e;--purple:#a855f7;
+  --font:'Outfit',sans-serif;--mono:'JetBrains Mono',monospace;
+  --r:16px;--shadow:0 20px 60px rgba(0,0,0,0.5);
 }
 *{box-sizing:border-box;margin:0;padding:0;}
 html{font-size:14px;}
@@ -47,396 +25,211 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:1
 ::-webkit-scrollbar-thumb{background:rgba(255,255,255,0.1);border-radius:99px;}
 button,input,select{font-family:var(--font);}
 
-/* ═══════════════════════════════════════════════════
-   LAYOUT
-═══════════════════════════════════════════════════ */
+/* LAYOUT */
 .app{display:flex;min-height:100vh;}
-
-/* SIDEBAR */
-.sidebar{
-  width:220px;min-width:220px;background:var(--bg2);
-  border-right:1px solid var(--border);
-  display:flex;flex-direction:column;
-  padding:0;position:fixed;top:0;left:0;height:100vh;z-index:200;
-  transition:.3s;
-}
-.sidebar-brand{
-  padding:20px 20px 16px;
-  border-bottom:1px solid var(--border);
-  display:flex;align-items:center;gap:10px;
-}
-.brand-logo{
-  width:36px;height:36px;border-radius:10px;flex-shrink:0;
-  background:linear-gradient(135deg,var(--accent),var(--cyan));
-  display:grid;place-items:center;
-  font-weight:800;font-size:1rem;color:#fff;
-  box-shadow:0 6px 20px rgba(99,102,241,0.4);
-}
-.brand-text{font-weight:700;font-size:.95rem;letter-spacing:-.01em;}
-.brand-text small{display:block;font-size:.68rem;color:var(--muted);font-weight:400;letter-spacing:.06em;text-transform:uppercase;}
-
-.sidebar-nav{padding:14px 12px;flex:1;overflow-y:auto;display:flex;flex-direction:column;gap:2px;}
-.nav-section-label{font-size:.65rem;text-transform:uppercase;letter-spacing:.12em;color:var(--muted);padding:10px 8px 4px;font-weight:600;}
-.nav-item{
-  display:flex;align-items:center;gap:10px;
-  padding:9px 10px;border-radius:10px;cursor:pointer;
-  color:var(--muted2);font-size:.85rem;font-weight:500;
-  transition:.15s;border:none;background:none;width:100%;text-align:left;
-}
+.sidebar{width:220px;min-width:220px;background:var(--bg2);border-right:1px solid var(--border);display:flex;flex-direction:column;position:fixed;top:0;left:0;height:100vh;z-index:200;}
+.sidebar-brand{padding:18px 20px 14px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:10px;}
+.brand-logo{width:36px;height:36px;border-radius:10px;background:linear-gradient(135deg,var(--accent),var(--cyan));display:grid;place-items:center;font-weight:800;font-size:1rem;color:#fff;box-shadow:0 6px 20px rgba(99,102,241,0.4);flex-shrink:0;}
+.brand-text{font-weight:700;font-size:.92rem;}
+.brand-text small{display:block;font-size:.65rem;color:var(--muted);font-weight:400;letter-spacing:.06em;text-transform:uppercase;}
+.sidebar-nav{padding:12px;flex:1;overflow-y:auto;display:flex;flex-direction:column;gap:2px;}
+.nav-sec{font-size:.63rem;text-transform:uppercase;letter-spacing:.12em;color:var(--muted);padding:10px 8px 4px;font-weight:600;}
+.nav-item{display:flex;align-items:center;gap:10px;padding:9px 10px;border-radius:10px;cursor:pointer;color:var(--muted2);font-size:.83rem;font-weight:500;transition:.15s;border:none;background:none;width:100%;text-align:left;}
 .nav-item:hover{background:rgba(255,255,255,0.05);color:var(--text);}
 .nav-item.active{background:rgba(99,102,241,0.15);color:var(--accent2);}
-.nav-item.active .nav-icon{color:var(--accent);}
-.nav-icon{font-size:1rem;width:18px;text-align:center;flex-shrink:0;}
-.nav-badge{margin-left:auto;background:var(--red);color:#fff;font-size:.62rem;padding:2px 6px;border-radius:99px;font-weight:600;}
-
+.nav-icon{font-size:.95rem;width:18px;text-align:center;flex-shrink:0;}
 .sidebar-footer{padding:12px;border-top:1px solid var(--border);}
-.sidebar-user{display:flex;align-items:center;gap:10px;padding:10px;border-radius:10px;background:rgba(255,255,255,0.04);cursor:pointer;}
+.sidebar-user{display:flex;align-items:center;gap:10px;padding:10px;border-radius:10px;background:rgba(255,255,255,0.04);}
 .user-avatar{width:32px;height:32px;border-radius:8px;background:linear-gradient(135deg,var(--accent),var(--purple));display:grid;place-items:center;font-weight:700;font-size:.75rem;flex-shrink:0;}
-.user-info strong{display:block;font-size:.82rem;}
-.user-info small{font-size:.7rem;color:var(--muted);}
-.status-dot{width:7px;height:7px;border-radius:50%;background:var(--green);margin-left:auto;box-shadow:0 0 6px var(--green);}
+.user-info strong{display:block;font-size:.8rem;}
+.user-info small{font-size:.68rem;color:var(--muted);}
+.u-dot{width:7px;height:7px;border-radius:50%;background:var(--green);margin-left:auto;box-shadow:0 0 6px var(--green);}
 
-/* MAIN */
-.content{margin-left:220px;flex:1;display:flex;flex-direction:column;min-height:100vh;}
+.content{margin-left:220px;flex:1;display:flex;flex-direction:column;}
+.topbar{background:rgba(8,11,20,0.95);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);padding:0 24px;height:58px;display:flex;align-items:center;gap:12px;position:sticky;top:0;z-index:100;flex-wrap:wrap;}
+.topbar-title{font-size:1rem;font-weight:700;margin-right:auto;}
+.topbar-title small{display:block;font-size:.7rem;color:var(--muted);font-weight:400;}
+.fsel{background:var(--bg3);border:1px solid var(--border);color:var(--text);border-radius:8px;padding:6px 10px;font-size:.78rem;}
+.finput{background:var(--bg3);border:1px solid var(--border);color:var(--text);border-radius:8px;padding:6px 10px;font-size:.78rem;}
+.flabel{font-size:.68rem;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;white-space:nowrap;}
+.fgroup{display:flex;align-items:center;gap:6px;}
+.upload-btn{display:inline-flex;align-items:center;gap:6px;padding:7px 14px;border-radius:9px;border:none;cursor:pointer;background:linear-gradient(135deg,var(--accent),#4f46e5);color:#fff;font-weight:600;font-size:.8rem;box-shadow:0 4px 14px rgba(99,102,241,0.35);transition:.2s;}
+.upload-btn:hover{transform:translateY(-1px);}
+.t-icon-btn{width:32px;height:32px;border-radius:8px;border:1px solid var(--border);background:var(--bg3);color:var(--muted2);display:grid;place-items:center;cursor:pointer;font-size:.9rem;transition:.15s;}
+.t-icon-btn:hover{border-color:var(--border2);color:var(--text);}
+.t-profile{display:flex;align-items:center;gap:8px;padding:5px 10px;border-radius:10px;background:var(--bg3);border:1px solid var(--border);}
+.t-avatar{width:28px;height:28px;border-radius:7px;background:linear-gradient(135deg,var(--accent),var(--cyan));display:grid;place-items:center;font-weight:700;font-size:.7rem;flex-shrink:0;}
+.t-profile strong{font-size:.78rem;}
+.t-profile small{font-size:.66rem;color:var(--muted);display:block;}
 
-/* TOPBAR */
-.topbar{
-  background:rgba(8,11,20,0.92);backdrop-filter:blur(20px);
-  border-bottom:1px solid var(--border);
-  padding:0 28px;height:60px;
-  display:flex;align-items:center;gap:16px;
-  position:sticky;top:0;z-index:100;
-}
-.topbar-title{font-size:1.05rem;font-weight:700;margin-right:auto;}
-.topbar-title small{display:block;font-size:.72rem;color:var(--muted);font-weight:400;}
+/* GS SYNC BAR */
+.gs-bar{display:flex;align-items:center;gap:10px;padding:8px 16px;border-radius:10px;background:rgba(16,185,129,0.07);border:1px solid rgba(16,185,129,0.2);font-size:.78rem;white-space:nowrap;}
+.gs-bar-icon{font-size:1rem;}
+.gs-label{font-weight:600;}
+.gs-sub{font-size:.68rem;color:var(--muted);}
+.gs-sync-btn{padding:4px 10px;border-radius:7px;border:1px solid rgba(16,185,129,0.3);background:rgba(16,185,129,0.1);color:var(--green);font-size:.72rem;cursor:pointer;font-family:var(--font);transition:.15s;}
+.gs-sync-btn:hover{background:rgba(16,185,129,0.2);}
 
-.filter-group{display:flex;align-items:center;gap:8px;}
-.filter-label{font-size:.7rem;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;white-space:nowrap;}
-select.filter-sel, input.filter-input{
-  background:var(--bg3);border:1px solid var(--border);
-  color:var(--text);border-radius:8px;padding:6px 10px;font-size:.8rem;
-  cursor:pointer;
-}
-.upload-btn{
-  display:inline-flex;align-items:center;gap:6px;
-  padding:8px 16px;border-radius:9px;border:none;cursor:pointer;
-  background:linear-gradient(135deg,var(--accent),#4f46e5);
-  color:#fff;font-weight:600;font-size:.82rem;
-  box-shadow:0 4px 14px rgba(99,102,241,0.35);
-  transition:.2s;
-}
-.upload-btn:hover{transform:translateY(-1px);box-shadow:0 6px 20px rgba(99,102,241,0.45);}
-.topbar-actions{display:flex;align-items:center;gap:10px;}
-.topbar-icon-btn{width:34px;height:34px;border-radius:8px;border:1px solid var(--border);background:var(--bg3);color:var(--muted2);display:grid;place-items:center;cursor:pointer;font-size:.95rem;transition:.15s;}
-.topbar-icon-btn:hover{border-color:var(--border2);color:var(--text);}
-.topbar-profile{display:flex;align-items:center;gap:8px;padding:6px 10px;border-radius:10px;background:var(--bg3);border:1px solid var(--border);cursor:pointer;}
-.topbar-avatar{width:30px;height:30px;border-radius:7px;background:linear-gradient(135deg,var(--accent),var(--cyan));display:grid;place-items:center;font-weight:700;font-size:.72rem;flex-shrink:0;}
-.topbar-profile strong{font-size:.8rem;}
-.topbar-profile small{font-size:.68rem;color:var(--muted);display:block;}
-
-/* PAGE */
-.page{padding:24px 28px;display:none;flex-direction:column;gap:22px;}
+.page{padding:22px 24px;display:none;flex-direction:column;gap:20px;}
 .page.active{display:flex;}
 
-/* ═══════════════════════════════════════════════════
-   COMPONENTS
-═══════════════════════════════════════════════════ */
-/* SECTION HEADERS */
-.section-head{display:flex;align-items:flex-end;justify-content:space-between;gap:12px;margin-bottom:14px;}
-.section-head h2{font-size:1rem;font-weight:700;}
-.section-head p{font-size:.78rem;color:var(--muted);}
-.section-head-right{display:flex;align-items:center;gap:8px;flex-shrink:0;}
-.tag-btn{padding:5px 12px;border-radius:7px;border:1px solid var(--border);background:var(--bg3);color:var(--muted2);font-size:.75rem;cursor:pointer;transition:.15s;}
+/* CARDS */
+.card{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:18px;}
+.card:hover{border-color:var(--border2);transition:.2s;}
+.s-head{display:flex;align-items:flex-end;justify-content:space-between;gap:10px;margin-bottom:12px;}
+.s-head h2{font-size:.95rem;font-weight:700;}
+.s-head p{font-size:.75rem;color:var(--muted);}
+.tag-btn{padding:5px 10px;border-radius:7px;border:1px solid var(--border);background:var(--bg3);color:var(--muted2);font-size:.73rem;cursor:pointer;transition:.15s;}
 .tag-btn:hover,.tag-btn.active{background:rgba(99,102,241,0.15);border-color:rgba(99,102,241,0.4);color:var(--accent2);}
 
-/* CARDS */
-.card{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:20px;}
-.card:hover{border-color:var(--border2);transition:.2s;}
+/* STATUS */
+.sbar{display:flex;align-items:center;gap:8px;padding:8px 14px;border-radius:9px;background:rgba(255,255,255,0.03);border:1px solid var(--border);font-size:.78rem;}
+.sdot{width:8px;height:8px;border-radius:50%;background:var(--muted);flex-shrink:0;}
+.sdot.ok{background:var(--green);box-shadow:0 0 8px var(--green);}
+.sdot.err{background:var(--red);box-shadow:0 0 8px var(--red);}
+.drop-zone-mini{border:1px dashed rgba(99,102,241,0.25);border-radius:10px;padding:7px 14px;color:var(--muted);font-size:.78rem;cursor:pointer;transition:.2s;background:rgba(99,102,241,0.03);}
+.drop-zone-mini:hover,.drop-zone-mini.drag-over{border-color:var(--accent);background:rgba(99,102,241,0.07);}
 
-/* KPI CARDS */
-.kpi-grid{display:grid;gap:16px;}
-.kpi-grid-5{grid-template-columns:repeat(5,1fr);}
-.kpi-grid-4{grid-template-columns:repeat(4,1fr);}
-.kpi-grid-3{grid-template-columns:repeat(3,1fr);}
-
-.kpi-card{
-  background:var(--card);border:1px solid var(--border);border-radius:var(--r);
-  padding:18px 20px;position:relative;overflow:hidden;
-}
-.kpi-card::before{
-  content:'';position:absolute;inset:0;
-  background:linear-gradient(135deg,rgba(99,102,241,0.06) 0%,transparent 50%);
-  pointer-events:none;
-}
-.kpi-card-icon{
-  width:38px;height:38px;border-radius:10px;
-  display:grid;place-items:center;font-size:1.1rem;margin-bottom:14px;
-  flex-shrink:0;
-}
-.kpi-card-top{display:flex;justify-content:space-between;align-items:flex-start;}
-.kpi-label{font-size:.68rem;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);margin-bottom:10px;font-weight:600;}
-.kpi-val{font-size:2rem;font-weight:800;line-height:1;margin-bottom:8px;font-family:var(--mono);}
+/* KPI */
+.kpi-grid5{display:grid;grid-template-columns:repeat(5,1fr);gap:14px;}
+.kpi-card{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:16px 18px;position:relative;overflow:hidden;}
+.kpi-card::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(99,102,241,0.07) 0%,transparent 55%);pointer-events:none;}
+.kpi-label{font-size:.67rem;text-transform:uppercase;letter-spacing:.1em;color:var(--cyan);margin-bottom:10px;font-weight:600;}
+.kpi-val{font-size:1.8rem;font-weight:800;line-height:1;margin-bottom:6px;font-family:var(--mono);}
 .kpi-sub{font-size:.75rem;color:var(--muted2);}
-.kpi-delta{display:inline-flex;align-items:center;gap:3px;font-size:.72rem;font-weight:600;padding:2px 7px;border-radius:99px;}
-.delta-up{background:rgba(16,185,129,0.15);color:var(--green);}
-.delta-dn{background:rgba(244,63,94,0.15);color:var(--red);}
-.delta-nt{background:rgba(100,116,139,0.15);color:var(--muted2);}
-.kpi-breakdown{margin-top:12px;padding-top:12px;border-top:1px solid var(--border);display:grid;gap:6px;}
-.kpi-breakdown-row{display:flex;justify-content:space-between;align-items:center;font-size:.75rem;}
-.kpi-breakdown-row span:last-child{font-weight:600;}
 
-/* TOP DESIGNER CARDS */
-.top-designer-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;}
-.top-designer-card{
-  border-radius:var(--r);padding:18px;position:relative;overflow:hidden;
-  border:1px solid var(--border);
-}
-.tdc-week{background:linear-gradient(135deg,rgba(251,191,36,0.12),rgba(17,24,39,0.95));}
-.tdc-month{background:linear-gradient(135deg,rgba(99,102,241,0.12),rgba(17,24,39,0.95));}
-.tdc-year{background:linear-gradient(135deg,rgba(16,185,129,0.12),rgba(17,24,39,0.95));}
-.tdc-trophy{font-size:1.4rem;margin-bottom:6px;}
-.tdc-period{font-size:.66rem;text-transform:uppercase;letter-spacing:.12em;color:var(--muted);font-weight:600;margin-bottom:8px;}
-.tdc-name{font-size:1.3rem;font-weight:800;margin-bottom:4px;}
-.tdc-count{font-size:.8rem;color:var(--muted2);}
-.tdc-delta{margin-top:10px;}
-.tdc-avatar{
-  position:absolute;right:16px;top:16px;
-  width:46px;height:46px;border-radius:12px;
-  display:grid;place-items:center;font-weight:800;font-size:1rem;
-  background:linear-gradient(135deg,var(--accent),var(--purple));
-}
+/* TOP DESIGNER HERO CARDS */
+.tdc{border-radius:var(--r);padding:16px;position:relative;overflow:hidden;border:1px solid var(--border);}
+.tdc-w{background:linear-gradient(135deg,rgba(251,191,36,0.1),rgba(17,24,39,0.95));}
+.tdc-m{background:linear-gradient(135deg,rgba(99,102,241,0.1),rgba(17,24,39,0.95));}
+.tdc-y{background:linear-gradient(135deg,rgba(16,185,129,0.1),rgba(17,24,39,0.95));}
+.tdc-trophy{font-size:1.2rem;margin-bottom:4px;}
+.tdc-period{font-size:.63rem;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);font-weight:600;margin-bottom:6px;}
+.tdc-name{font-size:1.2rem;font-weight:800;margin-bottom:3px;}
+.tdc-count{font-size:.78rem;color:var(--muted2);}
+.tdc-avatar{position:absolute;right:14px;top:14px;width:42px;height:42px;border-radius:11px;display:grid;place-items:center;font-weight:800;font-size:.9rem;}
 
-/* GRID LAYOUTS */
-.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:20px;}
-.grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:20px;}
-.grid-3-1{display:grid;grid-template-columns:3fr 1fr;gap:20px;}
-.grid-1-2{display:grid;grid-template-columns:1fr 2fr;gap:20px;}
-.grid-main{display:grid;grid-template-columns:260px 1fr 300px;gap:20px;}
+/* MAIN GRID */
+.dash-grid{display:grid;grid-template-columns:260px 1fr 290px;gap:18px;}
+.chart-col{display:grid;gap:18px;}
+.chart-row{display:grid;grid-template-columns:1fr 1fr;gap:18px;}
+canvas{width:100%!important;max-height:200px!important;}
+.side-col{display:grid;gap:18px;}
 
 /* LEADERBOARD */
-.leaderboard-table{width:100%;}
-.lb-header{display:grid;grid-template-columns:36px 1fr 80px 90px 80px;gap:8px;padding:6px 10px;font-size:.68rem;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);border-bottom:1px solid var(--border);}
-.lb-row{display:grid;grid-template-columns:36px 1fr 80px 90px 80px;gap:8px;padding:10px 10px;border-radius:10px;cursor:pointer;transition:.15s;align-items:center;}
+.lb-hdr{display:grid;grid-template-columns:32px 1fr 70px 80px 64px;gap:6px;padding:5px 8px;font-size:.64rem;text-transform:uppercase;letter-spacing:.07em;color:var(--muted);border-bottom:1px solid var(--border);}
+.lb-row{display:grid;grid-template-columns:32px 1fr 70px 80px 64px;gap:6px;padding:9px 8px;border-radius:9px;cursor:pointer;transition:.15s;align-items:center;}
 .lb-row:hover{background:rgba(255,255,255,0.04);}
 .lb-row.active{background:rgba(99,102,241,0.1);border:1px solid rgba(99,102,241,0.2);}
-.lb-rank{width:28px;height:28px;border-radius:8px;display:grid;place-items:center;font-weight:700;font-size:.8rem;background:rgba(255,255,255,0.07);}
-.lb-rank.r1{background:linear-gradient(135deg,#ffd166,#f59e0b);color:#000;}
-.lb-rank.r2{background:linear-gradient(135deg,#c4dff6,#60a5fa);color:#000;}
-.lb-rank.r3{background:linear-gradient(135deg,#e9d5ff,#a855f7);color:#000;}
-.lb-name{font-size:.85rem;font-weight:600;}
-.lb-sub{font-size:.7rem;color:var(--muted);}
-.lb-count{font-family:var(--mono);font-size:.85rem;font-weight:600;text-align:right;}
-.lb-bar-wrap{height:6px;background:rgba(255,255,255,0.07);border-radius:99px;overflow:hidden;}
+.lb-rank{width:26px;height:26px;border-radius:7px;display:grid;place-items:center;font-weight:700;font-size:.78rem;background:rgba(255,255,255,0.07);}
+.r1{background:linear-gradient(135deg,#ffd166,#f59e0b);color:#000;}
+.r2{background:linear-gradient(135deg,#c4dff6,#60a5fa);color:#000;}
+.r3{background:linear-gradient(135deg,#e9d5ff,#a855f7);color:#000;}
+.lb-name{font-size:.83rem;font-weight:600;}
+.lb-sub{font-size:.68rem;color:var(--muted);}
+.lb-cnt{font-family:var(--mono);font-size:.83rem;font-weight:600;text-align:right;}
+.lb-bar-w{height:5px;background:rgba(255,255,255,0.07);border-radius:99px;overflow:hidden;}
 .lb-bar{height:100%;border-radius:99px;background:linear-gradient(90deg,var(--accent),var(--cyan));}
-.lb-delta{font-size:.72rem;font-weight:600;text-align:right;}
+.lb-delta{font-size:.7rem;font-weight:600;text-align:right;}
 
-/* CHARTS */
-.chart-wrap{position:relative;}
-canvas{width:100%!important;max-height:220px!important;}
-.chart-legend{display:flex;flex-wrap:wrap;gap:10px;margin-top:10px;}
-.legend-item{display:flex;align-items:center;gap:5px;font-size:.72rem;color:var(--muted2);}
-.legend-dot{width:8px;height:8px;border-radius:50%;}
+/* RECORD */
+.rec-card{background:linear-gradient(135deg,rgba(251,191,36,0.1),var(--card));border:1px solid rgba(251,191,36,0.2);border-radius:var(--r);padding:16px;}
+.rec-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:10px 0;}
+.rec-stat{background:rgba(255,255,255,0.05);border-radius:9px;padding:9px;text-align:center;}
+.rec-stat-val{font-size:1.2rem;font-weight:800;font-family:var(--mono);}
+.rec-stat-lbl{font-size:.66rem;color:var(--muted);margin-top:2px;}
 
-/* RECORD CARD */
-.record-card{background:linear-gradient(135deg,rgba(251,191,36,0.12),var(--card));border:1px solid rgba(251,191,36,0.2);border-radius:var(--r);padding:18px;}
-.record-name{font-size:1.1rem;font-weight:800;margin-bottom:2px;}
-.record-meta{font-size:.75rem;color:var(--muted2);margin-bottom:12px;}
-.record-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;}
-.record-stat{background:rgba(255,255,255,0.05);border-radius:10px;padding:10px;text-align:center;}
-.record-stat-val{font-size:1.3rem;font-weight:800;font-family:var(--mono);}
-.record-stat-label{font-size:.68rem;color:var(--muted);margin-top:2px;}
+/* BOTTOM */
+.bot-item{display:flex;align-items:center;gap:9px;padding:9px 11px;border-radius:9px;background:rgba(244,63,94,0.06);border:1px solid rgba(244,63,94,0.15);cursor:pointer;transition:.15s;margin-bottom:7px;}
+.bot-item:hover{background:rgba(244,63,94,0.12);}
+.bot-av{width:30px;height:30px;border-radius:7px;display:grid;place-items:center;font-weight:700;font-size:.72rem;flex-shrink:0;}
+.bot-cnt{font-family:var(--mono);font-size:.85rem;font-weight:700;color:var(--red);}
 
-/* BOTTOM DESIGNERS */
-.bottom-list{display:grid;gap:8px;}
-.bottom-item{
-  display:flex;align-items:center;gap:10px;padding:10px 12px;
-  border-radius:10px;background:rgba(244,63,94,0.06);
-  border:1px solid rgba(244,63,94,0.15);cursor:pointer;transition:.15s;
-}
-.bottom-item:hover{background:rgba(244,63,94,0.12);}
-.bottom-avatar{width:32px;height:32px;border-radius:8px;display:grid;place-items:center;font-weight:700;font-size:.75rem;flex-shrink:0;}
-.bottom-name{font-size:.83rem;font-weight:600;flex:1;}
-.bottom-sub{font-size:.7rem;color:var(--muted);}
-.bottom-count{font-family:var(--mono);font-size:.88rem;font-weight:700;color:var(--red);}
-.bottom-perf{font-size:.68rem;color:var(--red);}
-
-/* ACTIVITY FEED */
-.activity-list{display:grid;gap:8px;max-height:360px;overflow-y:auto;}
-.activity-item{display:flex;align-items:flex-start;gap:10px;padding:10px 12px;border-radius:10px;background:rgba(255,255,255,0.03);border:1px solid var(--border);}
-.activity-dot{width:8px;height:8px;border-radius:50%;background:var(--cyan);flex-shrink:0;margin-top:4px;}
-.activity-text{font-size:.8rem;line-height:1.5;flex:1;}
-.activity-text strong{color:var(--text);}
-.activity-time{font-size:.68rem;color:var(--muted);flex-shrink:0;margin-top:2px;}
-.activity-status{display:inline-block;padding:2px 7px;border-radius:99px;font-size:.68rem;font-weight:600;}
+/* ACTIVITY */
+.act-list{display:grid;gap:7px;max-height:320px;overflow-y:auto;}
+.act-item{display:flex;align-items:flex-start;gap:9px;padding:9px 11px;border-radius:9px;background:rgba(255,255,255,0.03);border:1px solid var(--border);}
+.act-dot{width:7px;height:7px;border-radius:50%;background:var(--cyan);flex-shrink:0;margin-top:4px;}
+.act-text{font-size:.78rem;line-height:1.5;flex:1;}
+.act-text strong{color:var(--text);}
 
 /* STATUS PILLS */
+.sp{display:inline-block;padding:2px 7px;border-radius:99px;font-size:.68rem;font-weight:600;}
 .s-done{background:rgba(16,185,129,0.15);color:var(--green);}
 .s-new{background:rgba(6,182,212,0.15);color:var(--cyan);}
 .s-old{background:rgba(245,158,11,0.15);color:var(--amber);}
-.s-other{background:rgba(255,255,255,0.08);color:var(--muted2);}
+.s-oth{background:rgba(255,255,255,0.08);color:var(--muted2);}
 
-/* TRAINING INSIGHTS */
-.insight-list{display:grid;gap:8px;}
-.insight-item{
-  padding:12px 14px;border-radius:10px;
-  background:rgba(99,102,241,0.06);border-left:3px solid var(--accent);
-  font-size:.8rem;line-height:1.6;
-}
-.insight-item.warn{background:rgba(245,158,11,0.06);border-left-color:var(--amber);}
-.insight-item.danger{background:rgba(244,63,94,0.06);border-left-color:var(--red);}
-.insight-item.success{background:rgba(16,185,129,0.06);border-left-color:var(--green);}
-.insight-icon{margin-right:4px;}
-
-/* DESIGNER ANALYSIS PANEL */
-.analysis-panel{background:var(--card2);border:1px solid var(--border);border-radius:var(--r);padding:18px;}
-.analysis-header{display:flex;align-items:center;gap:12px;margin-bottom:16px;}
-.analysis-avatar{width:44px;height:44px;border-radius:12px;display:grid;place-items:center;font-weight:800;font-size:1rem;}
-.analysis-name{font-size:1rem;font-weight:700;}
-.analysis-role{font-size:.75rem;color:var(--muted);}
-.analysis-tabs{display:flex;gap:4px;margin-bottom:14px;background:rgba(255,255,255,0.04);padding:3px;border-radius:9px;}
-.a-tab{padding:5px 10px;border-radius:7px;font-size:.75rem;cursor:pointer;color:var(--muted2);border:none;background:none;transition:.15s;font-family:var(--font);}
-.a-tab.active{background:var(--accent);color:#fff;font-weight:600;}
-.analysis-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:14px;}
-.analysis-stat{background:rgba(255,255,255,0.04);border-radius:10px;padding:10px;text-align:center;}
-.analysis-stat-val{font-size:1.2rem;font-weight:800;font-family:var(--mono);}
-.analysis-stat-delta{font-size:.68rem;font-weight:600;}
-.analysis-stat-label{font-size:.67rem;color:var(--muted);margin-top:2px;}
-.analysis-table{width:100%;border-collapse:collapse;}
-.analysis-table th{font-size:.67rem;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);padding:6px 8px;text-align:left;border-bottom:1px solid var(--border);}
-.analysis-table td{font-size:.78rem;padding:7px 8px;border-bottom:1px solid rgba(255,255,255,0.03);}
-.analysis-table tr:hover td{background:rgba(255,255,255,0.02);}
-.analysis-empty{text-align:center;color:var(--muted);padding:24px;font-size:.82rem;}
-
-/* PROGRESS BAR */
-.prog-wrap{background:rgba(255,255,255,0.07);border-radius:99px;height:5px;overflow:hidden;}
-.prog-bar{height:100%;border-radius:99px;}
-
-/* COACHING SECTION */
-.coaching-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;}
-.coaching-card{border-radius:var(--r);padding:18px;border:1px solid var(--border);background:var(--card);}
-.coaching-score{font-size:2.5rem;font-weight:800;font-family:var(--mono);line-height:1;}
-.coaching-label{font-size:.7rem;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);margin-bottom:10px;}
-.coaching-bar{height:8px;border-radius:99px;overflow:hidden;background:rgba(255,255,255,0.07);margin:10px 0;}
-.coaching-desc{font-size:.78rem;color:var(--muted2);line-height:1.5;}
-.coaching-actions{margin-top:12px;display:grid;gap:6px;}
-.coaching-action{font-size:.75rem;padding:7px 10px;border-radius:8px;background:rgba(99,102,241,0.1);border:1px solid rgba(99,102,241,0.2);color:var(--accent2);display:flex;align-items:center;gap:6px;}
-
-/* PERFORMANCE RADAR */
-.perf-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;}
-.perf-metric{text-align:center;}
-.perf-circle{width:60px;height:60px;margin:0 auto 6px;position:relative;}
-.perf-circle svg{transform:rotate(-90deg);}
-.perf-circle-val{position:absolute;inset:0;display:grid;place-items:center;font-size:.8rem;font-weight:700;font-family:var(--mono);}
-.perf-metric-name{font-size:.68rem;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;}
+/* INSIGHTS */
+.ins-item{padding:10px 13px;border-radius:9px;background:rgba(99,102,241,0.06);border-left:3px solid var(--accent);font-size:.78rem;line-height:1.6;margin-bottom:7px;}
+.ins-item.warn{background:rgba(245,158,11,0.06);border-left-color:var(--amber);}
+.ins-item.danger{background:rgba(244,63,94,0.06);border-left-color:var(--red);}
+.ins-item.success{background:rgba(16,185,129,0.06);border-left-color:var(--green);}
 
 /* TABLE */
-.data-table-wrap{overflow-x:auto;}
-.data-table{width:100%;border-collapse:collapse;min-width:900px;}
-.data-table th{padding:11px 14px;font-size:.68rem;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);background:rgba(255,255,255,0.03);border-bottom:1px solid var(--border);text-align:left;white-space:nowrap;}
-.data-table td{padding:10px 14px;font-size:.8rem;border-bottom:1px solid rgba(255,255,255,0.04);white-space:nowrap;}
-.data-table tr:hover td{background:rgba(255,255,255,0.025);}
-.data-table .sort-th{cursor:pointer;user-select:none;}
-.data-table .sort-th:hover{color:var(--text);}
+.dt-wrap{overflow-x:auto;}
+.dt{width:100%;border-collapse:collapse;min-width:860px;}
+.dt th{padding:10px 13px;font-size:.65rem;text-transform:uppercase;letter-spacing:.07em;color:var(--muted);background:rgba(255,255,255,0.03);border-bottom:1px solid var(--border);text-align:left;cursor:pointer;}
+.dt th:hover{color:var(--text);}
+.dt td{padding:9px 13px;font-size:.78rem;border-bottom:1px solid rgba(255,255,255,0.04);}
+.dt tr:hover td{background:rgba(255,255,255,0.025);}
 
-/* MODAL */
-.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.7);z-index:500;display:none;align-items:center;justify-content:center;backdrop-filter:blur(4px);}
-.modal-overlay.open{display:flex;}
-.modal{background:var(--bg2);border:1px solid var(--border2);border-radius:20px;width:900px;max-width:95vw;max-height:90vh;overflow-y:auto;box-shadow:var(--shadow);}
-.modal-head{padding:20px 24px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;background:var(--bg2);z-index:1;}
-.modal-head h2{font-size:1.1rem;}
-.modal-close{width:30px;height:30px;border-radius:7px;border:1px solid var(--border);background:rgba(255,255,255,0.05);color:var(--muted2);cursor:pointer;display:grid;place-items:center;font-size:1.1rem;}
-.modal-body{padding:24px;}
+/* SPARKLINE */
+.spark{display:flex;align-items:flex-end;gap:2px;height:24px;}
+.spark-b{flex:1;border-radius:2px 2px 0 0;min-width:3px;}
+
+/* COACHING */
+.coach-card{border-radius:var(--r);padding:16px;border:1px solid var(--border);background:var(--card);}
+.coach-bar{height:7px;border-radius:99px;overflow:hidden;background:rgba(255,255,255,0.07);margin:9px 0;}
+.coach-action{font-size:.73rem;padding:6px 10px;border-radius:7px;background:rgba(99,102,241,0.1);border:1px solid rgba(99,102,241,0.2);color:var(--accent2);margin-bottom:5px;}
 
 /* FOOTER */
-.page-footer{padding:14px 28px;border-top:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;font-size:.75rem;color:var(--muted);}
-.footer-actions{display:flex;gap:8px;}
-.export-btn{display:inline-flex;align-items:center;gap:6px;padding:8px 14px;border-radius:8px;border:1px solid var(--border);background:var(--bg3);color:var(--muted2);font-size:.78rem;cursor:pointer;transition:.15s;}
-.export-btn:hover{border-color:var(--border2);color:var(--text);}
+.pg-footer{padding:12px 24px;border-top:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;font-size:.73rem;color:var(--muted);}
+.exp-btn{display:inline-flex;align-items:center;gap:5px;padding:7px 13px;border-radius:8px;border:1px solid var(--border);background:var(--bg3);color:var(--muted2);font-size:.76rem;cursor:pointer;transition:.15s;}
+.exp-btn:hover{border-color:var(--border2);color:var(--text);}
+.empty-note{text-align:center;color:var(--muted);padding:18px;font-size:.8rem;}
 
-/* DROPZONE */
-.drop-zone-mini{border:1px dashed rgba(99,102,241,0.3);border-radius:10px;padding:12px 18px;text-align:center;color:var(--muted);font-size:.8rem;cursor:pointer;transition:.2s;background:rgba(99,102,241,0.03);}
-.drop-zone-mini:hover,.drop-zone-mini.drag-over{border-color:var(--accent);background:rgba(99,102,241,0.07);}
-
-/* STATUS BAR */
-.status-bar{display:flex;align-items:center;gap:8px;padding:8px 14px;border-radius:9px;background:rgba(255,255,255,0.03);border:1px solid var(--border);font-size:.78rem;}
-.s-dot{width:8px;height:8px;border-radius:50%;background:var(--muted);flex-shrink:0;}
-.s-dot.ok{background:var(--green);box-shadow:0 0 8px var(--green);}
-.s-dot.err{background:var(--red);box-shadow:0 0 8px var(--red);}
-
-/* DIVIDER */
-.divider{height:1px;background:var(--border);margin:4px 0;}
-
-/* NOTE */
-.empty-note{text-align:center;color:var(--muted);padding:20px;font-size:.82rem;}
-
-/* SCORE RING */
-.score-ring{display:inline-flex;align-items:center;justify-content:center;width:56px;height:56px;border-radius:50%;border:3px solid var(--accent);font-family:var(--mono);font-weight:700;font-size:1rem;}
-
-/* MINI SPARKLINE */
-.sparkline{display:flex;align-items:flex-end;gap:2px;height:28px;}
-.sparkline-bar{flex:1;border-radius:2px 2px 0 0;background:rgba(99,102,241,0.5);min-width:4px;}
-
-/* ═══════════════════════════════════════════════════
-   RESPONSIVE
-═══════════════════════════════════════════════════ */
-@media(max-width:1400px){
-  .kpi-grid-5{grid-template-columns:repeat(3,1fr);}
-  .grid-main{grid-template-columns:240px 1fr 280px;}
-}
-@media(max-width:1100px){
-  .sidebar{width:60px;overflow:hidden;}
-  .sidebar-brand .brand-text,.sidebar-nav .nav-item span,.sidebar-footer .user-info,.nav-section-label,.nav-badge,.status-dot{display:none;}
-  .sidebar-brand{justify-content:center;}
-  .nav-item{justify-content:center;padding:12px 0;}
-  .sidebar-user{justify-content:center;}
-  .content{margin-left:60px;}
-  .grid-main{grid-template-columns:1fr;}
-  .kpi-grid-5,.kpi-grid-4{grid-template-columns:repeat(2,1fr);}
-  .top-designer-cards,.coaching-grid{grid-template-columns:1fr 1fr;}
-}
+@media(max-width:1300px){.dash-grid{grid-template-columns:1fr;}.kpi-grid5{grid-template-columns:repeat(3,1fr);}}
 </style>
 </head>
 <body>
 <div class="app">
 
-<!-- ─── SIDEBAR ─── -->
+<!-- SIDEBAR -->
 <aside class="sidebar">
   <div class="sidebar-brand">
     <div class="brand-logo">DP</div>
     <div class="brand-text">Designer Hub<small>Command Center</small></div>
   </div>
   <nav class="sidebar-nav">
-    <div class="nav-section-label">Analytics</div>
+    <div class="nav-sec">Analytics</div>
     <button class="nav-item active" onclick="showPage('dashboard')"><span class="nav-icon">📊</span><span>Dashboard</span></button>
     <button class="nav-item" onclick="showPage('leaderboard')"><span class="nav-icon">🏆</span><span>Leaderboard</span></button>
     <button class="nav-item" onclick="showPage('designer')"><span class="nav-icon">👤</span><span>Designer Analysis</span></button>
     <button class="nav-item" onclick="showPage('coaching')"><span class="nav-icon">🎯</span><span>Coaching Engine</span></button>
-    <div class="nav-section-label">Operations</div>
+    <div class="nav-sec">Operations</div>
     <button class="nav-item" onclick="showPage('products')"><span class="nav-icon">📦</span><span>Products</span></button>
-    <button class="nav-item" onclick="showPage('insights')"><span class="nav-icon">💡</span><span>Daily Insights</span></button>
+    <button class="nav-item" onclick="showPage('insights')"><span class="nav-icon">💡</span><span>Insights</span></button>
     <button class="nav-item" onclick="showPage('reports')"><span class="nav-icon">📄</span><span>Reports</span></button>
-    <div class="nav-section-label">Settings</div>
+    <div class="nav-sec">System</div>
     <button class="nav-item" onclick="showPage('settings')"><span class="nav-icon">⚙️</span><span>Settings</span></button>
   </nav>
   <div class="sidebar-footer">
     <div class="sidebar-user">
       <div class="user-avatar">CR</div>
       <div class="user-info"><strong>Creative Head</strong><small>Administrator</small></div>
-      <div class="status-dot"></div>
+      <div class="u-dot"></div>
     </div>
   </div>
 </aside>
 
-<!-- ─── CONTENT ─── -->
+<!-- CONTENT -->
 <div class="content">
 
   <!-- TOPBAR -->
   <header class="topbar">
-    <div class="topbar-title">Designer Performance<small id="topbarSub">Upload a file to begin</small></div>
-
-    <div class="filter-group">
-      <span class="filter-label">Date</span>
-      <select class="filter-sel" id="rangePreset" onchange="filterAndRender()">
+    <div class="topbar-title">Designer Performance<small id="topbarSub">Connecting to Google Sheets…</small></div>
+    <div class="fgroup"><span class="flabel">Date</span>
+      <select class="fsel" id="rangePreset" onchange="onPresetChange()">
         <option value="all">All Time</option>
         <option value="this-week">This Week</option>
         <option value="this-month">This Month</option>
@@ -444,299 +237,255 @@ canvas{width:100%!important;max-height:220px!important;}
         <option value="custom">Custom</option>
       </select>
     </div>
-    <div id="customDateWrap" class="filter-group" style="display:none">
-      <input class="filter-input" type="date" id="startDate" onchange="filterAndRender()">
+    <div class="fgroup" id="customDateWrap" style="display:none">
+      <input class="finput" type="date" id="startDate" onchange="filterAndRender()">
       <span style="color:var(--muted);font-size:.75rem">→</span>
-      <input class="filter-input" type="date" id="endDate" onchange="filterAndRender()">
+      <input class="finput" type="date" id="endDate" onchange="filterAndRender()">
     </div>
-
-    <div class="filter-group">
-      <span class="filter-label">Designer</span>
-      <input class="filter-input" id="searchInput" type="search" placeholder="Search..." style="width:140px" oninput="filterAndRender()">
+    <div class="fgroup"><span class="flabel">Search</span>
+      <input class="finput" id="searchInput" type="search" placeholder="Designer…" style="width:130px" oninput="filterAndRender()">
     </div>
-
     <label class="upload-btn" for="fileInput">⬆ Upload Excel</label>
     <input id="fileInput" type="file" accept=".xlsx,.xls,.csv" style="display:none" onchange="handleFileInput(event)">
-
-    <div class="topbar-actions">
-      <div class="topbar-icon-btn" title="Refresh" onclick="filterAndRender()">↺</div>
-      <div class="topbar-icon-btn" title="Export" onclick="exportExcel()">⬇</div>
-      <div class="topbar-profile">
-        <div class="topbar-avatar">CR</div>
-        <div><strong>Creative Head</strong><small>Admin</small></div>
-      </div>
+    <div class="t-icon-btn" onclick="loadFromGoogleSheets()" title="Sync Google Sheets">↺</div>
+    <div class="t-icon-btn" onclick="exportExcel()" title="Export">⬇</div>
+    <div class="t-profile">
+      <div class="t-avatar">CR</div>
+      <div><strong>Creative Head</strong><small>Admin</small></div>
     </div>
   </header>
 
-  <!-- ══════════════════════════════════════
-       PAGE: DASHBOARD
-  ══════════════════════════════════════ -->
+  <!-- ══ PAGE: DASHBOARD ══ -->
   <div class="page active" id="page-dashboard">
 
-    <!-- Upload & Status -->
-    <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;">
-      <div class="status-bar" style="flex:1;min-width:200px">
-        <div class="s-dot" id="statusDot"></div>
-        <span id="statusText">Ready — upload an Excel or CSV file to load designer data.</span>
+    <!-- STATUS ROW -->
+    <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
+      <div class="sbar" style="flex:1;min-width:200px">
+        <div class="sdot" id="statusDot"></div>
+        <span id="statusText">Connecting to Google Sheets…</span>
       </div>
-      <div class="drop-zone-mini" id="dropZone" onclick="document.getElementById('fileInput').click()" style="padding:8px 16px;font-size:.78rem;">
-        ⊕ Drop Excel here or click to upload
+      <!-- GOOGLE SHEETS LIVE INDICATOR -->
+      <div class="gs-bar">
+        <span class="gs-bar-icon">📊</span>
+        <div>
+          <div class="gs-label" id="gsIndicator" style="color:var(--amber)">⟳ Connecting…</div>
+          <div class="gs-sub" id="gsLastSync">Auto-syncs every 5 min</div>
+        </div>
+        <button class="gs-sync-btn" onclick="loadFromGoogleSheets()">↺ Sync Now</button>
+      </div>
+      <div class="drop-zone-mini" id="dropZone" onclick="document.getElementById('fileInput').click()">
+        ⊕ Manual upload (override)
       </div>
     </div>
 
-    <!-- TOP DESIGNER CARDS + TOTALS -->
-    <div style="display:grid;grid-template-columns:1fr 1fr 1fr 200px 200px;gap:16px;" id="heroRow">
-      <div class="top-designer-card tdc-week">
+    <!-- HERO ROW -->
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr 190px 190px;gap:14px;">
+      <div class="tdc tdc-w">
         <div class="tdc-trophy">🏅</div>
         <div class="tdc-period">Top Designer · Week</div>
         <div class="tdc-name" id="topWeekName">—</div>
-        <div class="tdc-count"><span id="topWeekCount">—</span> products</div>
-        <div class="tdc-delta"><span class="kpi-delta delta-nt" id="topWeekDelta">No data</span></div>
-        <div class="tdc-avatar" id="topWeekAvatar" style="background:linear-gradient(135deg,#fbbf24,#f59e0b)">—</div>
+        <div class="tdc-count" id="topWeekCount">— products</div>
+        <div class="tdc-avatar" id="topWeekAv" style="background:linear-gradient(135deg,#fbbf24,#f59e0b)">—</div>
       </div>
-      <div class="top-designer-card tdc-month">
+      <div class="tdc tdc-m">
         <div class="tdc-trophy">🥇</div>
         <div class="tdc-period">Top Designer · Month</div>
         <div class="tdc-name" id="topMonthName">—</div>
-        <div class="tdc-count"><span id="topMonthCount">—</span> products</div>
-        <div class="tdc-delta"><span class="kpi-delta delta-nt" id="topMonthDelta">No data</span></div>
-        <div class="tdc-avatar" id="topMonthAvatar" style="background:linear-gradient(135deg,var(--accent),var(--purple))">—</div>
+        <div class="tdc-count" id="topMonthCount">— products</div>
+        <div class="tdc-avatar" id="topMonthAv" style="background:linear-gradient(135deg,var(--accent),var(--purple))">—</div>
       </div>
-      <div class="top-designer-card tdc-year">
+      <div class="tdc tdc-y">
         <div class="tdc-trophy">👑</div>
         <div class="tdc-period">Top Designer · Year</div>
         <div class="tdc-name" id="topYearName">—</div>
-        <div class="tdc-count"><span id="topYearCount">—</span> products</div>
-        <div class="tdc-delta"><span class="kpi-delta delta-nt" id="topYearDelta">No data</span></div>
-        <div class="tdc-avatar" id="topYearAvatar" style="background:linear-gradient(135deg,var(--green),#059669)">—</div>
+        <div class="tdc-count" id="topYearCount">— products</div>
+        <div class="tdc-avatar" id="topYearAv" style="background:linear-gradient(135deg,var(--green),#059669)">—</div>
       </div>
       <div class="kpi-card">
-        <div class="kpi-label">Total Images Created</div>
+        <div class="kpi-label">Total Products</div>
         <div class="kpi-val" id="kpiTotal">0</div>
-        <div class="kpi-sub">Across all designers</div>
+        <div class="kpi-sub">All time</div>
       </div>
       <div class="kpi-card">
         <div class="kpi-label">Active Designers</div>
         <div class="kpi-val" id="kpiDesigners">0</div>
-        <div class="kpi-sub" id="kpiDesignerSub">No data loaded</div>
+        <div class="kpi-sub" id="kpiDesignerSub">—</div>
       </div>
     </div>
 
     <!-- MAIN GRID -->
-    <div class="grid-main">
+    <div class="dash-grid">
 
       <!-- LEFT: LEADERBOARD -->
       <div class="card" style="padding:0;overflow:hidden;">
-        <div style="padding:16px 18px 10px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;">
-          <div><div style="font-size:.85rem;font-weight:700;">Top 10 Leaderboard</div><div style="font-size:.7rem;color:var(--muted)">Ranked by products created</div></div>
-          <button class="tag-btn" onclick="showPage('leaderboard')">View All →</button>
+        <div style="padding:14px 16px 10px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;">
+          <div><div style="font-size:.85rem;font-weight:700;">Top 10 Leaderboard</div><div style="font-size:.68rem;color:var(--muted)">By products created</div></div>
+          <button class="tag-btn" onclick="showPage('leaderboard')">All →</button>
         </div>
-        <div style="padding:10px 8px;" id="leaderboardList"><div class="empty-note">Upload file to see rankings.</div></div>
+        <div style="padding:8px 6px;" id="leaderboardList"><div class="empty-note">Loading…</div></div>
       </div>
 
       <!-- CENTER: CHARTS -->
-      <div style="display:grid;gap:18px;">
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:18px;">
-          <div class="card">
-            <div class="section-head"><div><h2>Weekly Trend</h2><p>Products per week</p></div>
-              <div class="section-head-right"><button class="tag-btn active" onclick="setChartPeriod('weekly','week')">Week</button><button class="tag-btn" onclick="setChartPeriod('weekly','month')">Month</button></div>
-            </div>
-            <div class="chart-wrap"><canvas id="chartWeekly"></canvas></div>
-          </div>
-          <div class="card">
-            <div class="section-head"><div><h2>Monthly Trend</h2><p>Monthly output</p></div></div>
-            <div class="chart-wrap"><canvas id="chartMonthly"></canvas></div>
-          </div>
+      <div class="chart-col">
+        <div class="chart-row">
+          <div class="card"><div class="s-head"><div><h2>Weekly Trend</h2><p>Products/week</p></div></div><canvas id="chartWeekly"></canvas></div>
+          <div class="card"><div class="s-head"><div><h2>Monthly Trend</h2><p>Products/month</p></div></div><canvas id="chartMonthly"></canvas></div>
         </div>
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:18px;">
-          <div class="card">
-            <div class="section-head"><div><h2>Designer Comparison</h2><p>Top creators output</p></div></div>
-            <div class="chart-wrap"><canvas id="chartTop10"></canvas></div>
-          </div>
-          <div class="card">
-            <div class="section-head"><div><h2>Output Distribution</h2><p>Designer share</p></div></div>
-            <div class="chart-wrap"><canvas id="chartDist"></canvas></div>
-          </div>
+        <div class="chart-row">
+          <div class="card"><div class="s-head"><div><h2>Designer Comparison</h2><p>Top 10 output</p></div></div><canvas id="chartTop10"></canvas></div>
+          <div class="card"><div class="s-head"><div><h2>Distribution</h2><p>Share of output</p></div></div><canvas id="chartDist"></canvas></div>
         </div>
       </div>
 
-      <!-- RIGHT: RECORD + BOTTOM 3 + ANALYSIS -->
-      <div style="display:grid;gap:18px;">
-        <!-- Peak Day Record -->
-        <div class="record-card">
-          <div style="font-size:.68rem;text-transform:uppercase;letter-spacing:.1em;color:var(--amber);font-weight:600;margin-bottom:8px;">⚡ Highest Output in a Day</div>
-          <div class="record-name" id="recordName">—</div>
-          <div class="record-meta" id="recordMeta">No data loaded</div>
-          <div class="record-stats">
-            <div class="record-stat"><div class="record-stat-val" id="recordCount">—</div><div class="record-stat-label">Products</div></div>
-            <div class="record-stat"><div class="record-stat-val" id="recordDate">—</div><div class="record-stat-label">Date</div></div>
-            <div class="record-stat"><div class="record-stat-val" id="recordBrand">—</div><div class="record-stat-label">Brand</div></div>
+      <!-- RIGHT -->
+      <div class="side-col">
+        <div class="rec-card">
+          <div style="font-size:.65rem;text-transform:uppercase;letter-spacing:.1em;color:var(--amber);font-weight:600;margin-bottom:7px;">⚡ Peak Day Record</div>
+          <div style="font-size:1rem;font-weight:800;" id="recordName">—</div>
+          <div style="font-size:.73rem;color:var(--muted2);margin-bottom:4px;" id="recordMeta">No data</div>
+          <div class="rec-stats">
+            <div class="rec-stat"><div class="rec-stat-val" id="recordCount">—</div><div class="rec-stat-lbl">Products</div></div>
+            <div class="rec-stat"><div class="rec-stat-val" id="recordDate">—</div><div class="rec-stat-lbl">Date</div></div>
+            <div class="rec-stat"><div class="rec-stat-val" id="recordBrand">—</div><div class="rec-stat-lbl">Brand</div></div>
           </div>
-          <div style="font-size:.75rem;color:var(--muted);margin-top:8px;">Product: <span id="recordProduct" style="color:var(--muted2)">—</span></div>
+          <div style="font-size:.72rem;color:var(--muted)">Product: <span id="recordProduct" style="color:var(--muted2)">—</span></div>
         </div>
 
-        <!-- Bottom 3 -->
         <div class="card" style="padding:0;overflow:hidden;">
-          <div style="padding:14px 16px 10px;border-bottom:1px solid var(--border);">
-            <div style="font-size:.85rem;font-weight:700;">⚠ Bottom 3 Designers</div>
-            <div style="font-size:.7rem;color:var(--muted)">Needs coaching — lowest output</div>
-          </div>
-          <div style="padding:10px 12px;" id="bottomList"><div class="empty-note">No data.</div></div>
+          <div style="padding:12px 14px 8px;border-bottom:1px solid var(--border);"><div style="font-size:.83rem;font-weight:700;">⚠ Bottom 3 Designers</div><div style="font-size:.68rem;color:var(--muted)">Needs coaching</div></div>
+          <div style="padding:10px 11px;" id="bottomList"><div class="empty-note">No data.</div></div>
         </div>
 
-        <!-- Designer Analysis (inline) -->
         <div class="card" style="padding:0;overflow:hidden;">
-          <div style="padding:14px 16px 10px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;">
-            <div><div style="font-size:.85rem;font-weight:700;">Designer Analysis</div><div style="font-size:.7rem;color:var(--muted)" id="analysisSubtitle">Click a designer to view</div></div>
-            <div id="exportDesignerBtn" style="display:none"><button class="tag-btn" onclick="exportDesignerReport()">Export →</button></div>
+          <div style="padding:12px 14px 8px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;">
+            <div><div style="font-size:.83rem;font-weight:700;">Designer Analysis</div><div style="font-size:.68rem;color:var(--muted)" id="analysisSub">Click a designer</div></div>
+            <button id="expDesBtn" class="tag-btn" style="display:none" onclick="exportDesignerReport()">Export →</button>
           </div>
-          <div style="padding:14px;" id="analysisPanel"><div class="empty-note">Select a designer from the leaderboard or bottom list.</div></div>
+          <div style="padding:13px;" id="analysisPanel"><div class="empty-note">Select a designer from the list.</div></div>
         </div>
       </div>
 
-    </div><!-- /grid-main -->
+    </div>
 
-    <!-- BOTTOM ROW: Activity + Insights + KPIs -->
-    <div class="grid-3">
+    <!-- BOTTOM ROW -->
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:18px;">
       <div class="card">
-        <div class="section-head"><div><h2>Recent Activity Feed</h2><p>Latest uploads & updates</p></div></div>
-        <div class="activity-list" id="activityFeed"><div class="empty-note">No activity yet.</div></div>
+        <div class="s-head"><div><h2>Activity Feed</h2><p>Latest updates</p></div></div>
+        <div class="act-list" id="activityFeed"><div class="empty-note">No activity.</div></div>
       </div>
       <div class="card">
-        <div class="section-head"><div><h2>Training Insight Engine</h2><p>AI coaching recommendations</p></div></div>
-        <div class="insight-list" id="insightList"><div class="empty-note">Insights appear after loading data.</div></div>
-        <div style="margin-top:12px;padding-top:10px;border-top:1px solid var(--border);font-size:.7rem;color:var(--muted)">Analysis based on loaded performance data</div>
+        <div class="s-head"><div><h2>Training Insights</h2><p>AI coaching tips</p></div></div>
+        <div id="insightList"><div class="empty-note">Load data for insights.</div></div>
+        <div style="margin-top:10px;padding-top:8px;border-top:1px solid var(--border);font-size:.68rem;color:var(--muted)">Based on loaded performance data</div>
       </div>
       <div class="card">
-        <div class="section-head"><div><h2>Period KPIs</h2><p>Current filter metrics</p></div></div>
-        <div style="display:grid;gap:10px;" id="periodKpis">
-          <div class="empty-note">No data loaded.</div>
-        </div>
+        <div class="s-head"><div><h2>Period KPIs</h2><p>Current filter</p></div></div>
+        <div id="periodKpis"><div class="empty-note">No data.</div></div>
       </div>
     </div>
 
-    <!-- PRODUCT TABLE -->
+    <!-- TABLE -->
     <div class="card" style="padding:0;overflow:hidden;">
-      <div style="padding:16px 18px 12px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;">
-        <div><div style="font-size:.95rem;font-weight:700;">Designer Work Details</div><div style="font-size:.72rem;color:var(--muted)" id="tableCount">Detailed product records</div></div>
-        <div style="display:flex;gap:8px;">
-          <button class="export-btn" onclick="exportExcel()">📊 Excel</button>
-          <button class="export-btn" onclick="exportCsv()">📄 CSV</button>
-        </div>
+      <div style="padding:14px 16px 10px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;">
+        <div><div style="font-size:.92rem;font-weight:700;">Work Details</div><div style="font-size:.7rem;color:var(--muted)" id="tableCount">—</div></div>
+        <div style="display:flex;gap:8px;"><button class="exp-btn" onclick="exportExcel()">📊 Excel</button><button class="exp-btn" onclick="exportCsv()">📄 CSV</button></div>
       </div>
-      <div class="panel-body data-table-wrap">
-        <table class="data-table">
-          <thead><tr>
-            <th class="sort-th" onclick="sortTable('designer')">Designer ⇅</th>
-            <th class="sort-th" onclick="sortTable('product')">Product (APS) ⇅</th>
-            <th>ASIN</th><th>EAN</th><th>Brand</th>
-            <th class="sort-th" onclick="sortTable('status')">Status ⇅</th>
-            <th class="sort-th" onclick="sortTable('date')">Date ⇅</th>
-          </tr></thead>
-          <tbody id="detailTableBody"><tr><td colspan="7" style="text-align:center;color:var(--muted);padding:30px">Upload a file to see records.</td></tr></tbody>
-        </table>
-      </div>
+      <div class="dt-wrap"><table class="dt">
+        <thead><tr>
+          <th onclick="sortTable('designer')">Designer ⇅</th>
+          <th onclick="sortTable('product')">Product (APS) ⇅</th>
+          <th>ASIN</th><th>EAN</th><th>Brand</th>
+          <th onclick="sortTable('status')">Status ⇅</th>
+          <th onclick="sortTable('date')">Date ⇅</th>
+        </tr></thead>
+        <tbody id="detailTableBody"><tr><td colspan="7" style="text-align:center;color:var(--muted);padding:28px">Loading Google Sheets data…</td></tr></tbody>
+      </table></div>
     </div>
 
-    <div class="page-footer">
-      <span id="footerInfo">© 2024 Designer Performance Command Center</span>
-      <div class="footer-actions">
-        <button class="export-btn" onclick="exportExcel()">📊 Export Excel Summary</button>
-        <button class="export-btn" onclick="exportCsv()">📄 Export CSV Report</button>
+    <div class="pg-footer">
+      <span id="footerInfo">© 2024 Designer Performance Command Center · Google Sheets Live</span>
+      <div style="display:flex;gap:8px;">
+        <button class="exp-btn" onclick="exportExcel()">📊 Export Excel</button>
+        <button class="exp-btn" onclick="exportCsv()">📄 Export CSV</button>
       </div>
     </div>
-  </div><!-- /page-dashboard -->
+  </div>
 
-  <!-- ══════════════════════════════════════
-       PAGE: LEADERBOARD (Full)
-  ══════════════════════════════════════ -->
+  <!-- ══ PAGE: LEADERBOARD ══ -->
   <div class="page" id="page-leaderboard">
-    <div class="section-head"><div><h2 style="font-size:1.2rem">Full Leaderboard</h2><p>Complete designer ranking with performance metrics</p></div></div>
+    <div style="font-size:1.1rem;font-weight:700;margin-bottom:4px">Full Leaderboard</div>
     <div class="card" style="padding:0;overflow:hidden;">
-      <div style="overflow-x:auto;">
-        <table class="data-table" id="fullLeaderboardTable">
-          <thead><tr>
-            <th>Rank</th><th>Designer</th><th>Total Products</th>
-            <th>This Month</th><th>This Week</th>
-            <th>Avg/Day</th><th>Top Product</th><th>Best Day</th><th>Trend</th><th>Action</th>
-          </tr></thead>
-          <tbody id="fullLeaderboardBody"><tr><td colspan="10" style="text-align:center;color:var(--muted);padding:30px">Load data to see rankings.</td></tr></tbody>
-        </table>
-      </div>
+      <div class="dt-wrap"><table class="dt">
+        <thead><tr><th>Rank</th><th>Designer</th><th>Total</th><th>Month</th><th>Week</th><th>Avg/Day</th><th>Active Days</th><th>Top Brand</th><th>Best Day</th><th>Trend</th><th>Action</th></tr></thead>
+        <tbody id="fullLbBody"><tr><td colspan="11" style="text-align:center;color:var(--muted);padding:28px">Load data to see rankings.</td></tr></tbody>
+      </table></div>
     </div>
   </div>
 
-  <!-- ══════════════════════════════════════
-       PAGE: DESIGNER ANALYSIS (Deep Dive)
-  ══════════════════════════════════════ -->
+  <!-- ══ PAGE: DESIGNER ══ -->
   <div class="page" id="page-designer">
-    <div class="section-head"><div><h2 style="font-size:1.2rem">Designer Deep Dive</h2><p>Select a designer for complete performance analysis</p></div></div>
-    <div style="display:grid;grid-template-columns:280px 1fr;gap:20px;">
+    <div style="font-size:1.1rem;font-weight:700;margin-bottom:4px">Designer Deep Dive</div>
+    <div style="display:grid;grid-template-columns:260px 1fr;gap:18px;">
       <div class="card" style="padding:0;overflow:hidden;">
-        <div style="padding:14px 16px;border-bottom:1px solid var(--border);font-size:.85rem;font-weight:700;">Select Designer</div>
-        <div style="padding:8px;" id="designerPickerList"><div class="empty-note">Load data first.</div></div>
+        <div style="padding:12px 14px;border-bottom:1px solid var(--border);font-size:.83rem;font-weight:700;">Select Designer</div>
+        <div style="padding:7px;" id="designerPickerList"><div class="empty-note">Load data first.</div></div>
       </div>
-      <div id="deepDivePanel">
-        <div class="card" style="text-align:center;padding:40px;color:var(--muted);">Select a designer from the left to see their full analysis.</div>
-      </div>
+      <div id="deepDivePanel"><div class="card" style="text-align:center;padding:36px;color:var(--muted);">Select a designer from the left.</div></div>
     </div>
   </div>
 
-  <!-- ══════════════════════════════════════
-       PAGE: COACHING ENGINE
-  ══════════════════════════════════════ -->
+  <!-- ══ PAGE: COACHING ══ -->
   <div class="page" id="page-coaching">
-    <div class="section-head"><div><h2 style="font-size:1.2rem">Coaching & Training Engine</h2><p>Data-driven coaching plans to build your best team</p></div></div>
-    <div id="coachingContent">
-      <div class="card" style="text-align:center;padding:40px;color:var(--muted);">Load designer data to generate coaching recommendations.</div>
-    </div>
+    <div style="font-size:1.1rem;font-weight:700;margin-bottom:4px">Coaching & Training Engine</div>
+    <div id="coachingContent"><div class="card" style="text-align:center;padding:36px;color:var(--muted);">Load data to generate coaching plans.</div></div>
   </div>
 
-  <!-- ══════════════════════════════════════
-       PAGE: PRODUCTS
-  ══════════════════════════════════════ -->
+  <!-- ══ PAGE: PRODUCTS ══ -->
   <div class="page" id="page-products">
-    <div class="section-head"><div><h2 style="font-size:1.2rem">Product Records</h2><p>Full product listing</p></div></div>
-    <div class="card" style="padding:0;">
-      <div class="data-table-wrap">
-        <table class="data-table">
-          <thead><tr><th>Designer</th><th>Product (APS)</th><th>ASIN</th><th>EAN</th><th>Brand</th><th>Status</th><th>Date</th></tr></thead>
-          <tbody id="productsTableBody"><tr><td colspan="7" style="text-align:center;color:var(--muted);padding:30px">No data.</td></tr></tbody>
-        </table>
-      </div>
-    </div>
+    <div style="font-size:1.1rem;font-weight:700;margin-bottom:4px">All Products</div>
+    <div class="card" style="padding:0;"><div class="dt-wrap"><table class="dt">
+      <thead><tr><th>Designer</th><th>Product</th><th>ASIN</th><th>EAN</th><th>Brand</th><th>Status</th><th>Date</th></tr></thead>
+      <tbody id="productsBody"><tr><td colspan="7" style="text-align:center;color:var(--muted);padding:28px">No data.</td></tr></tbody>
+    </table></div></div>
   </div>
 
-  <!-- ══════════════════════════════════════
-       PAGE: INSIGHTS
-  ══════════════════════════════════════ -->
+  <!-- ══ PAGE: INSIGHTS ══ -->
   <div class="page" id="page-insights">
-    <div class="section-head"><div><h2 style="font-size:1.2rem">Daily Insights</h2><p>Performance analytics & observations</p></div></div>
-    <div id="insightsPageContent">
-      <div class="card" style="padding:40px;text-align:center;color:var(--muted)">Load data to generate insights.</div>
-    </div>
+    <div style="font-size:1.1rem;font-weight:700;margin-bottom:4px">Daily Insights</div>
+    <div id="insightsPageContent"><div class="card" style="padding:36px;text-align:center;color:var(--muted)">Load data first.</div></div>
   </div>
 
-  <!-- REPORTS, SETTINGS pages (placeholder) -->
+  <!-- ══ PAGE: REPORTS ══ -->
   <div class="page" id="page-reports">
-    <div class="section-head"><div><h2 style="font-size:1.2rem">Reports</h2></div></div>
-    <div class="card" style="padding:30px;">
-      <p style="color:var(--muted);margin-bottom:16px">Generate and export reports for any period.</p>
+    <div style="font-size:1.1rem;font-weight:700;margin-bottom:4px">Reports</div>
+    <div class="card" style="padding:24px;">
+      <p style="color:var(--muted2);font-size:.85rem;margin-bottom:16px">Export current filtered data:</p>
       <div style="display:flex;gap:10px;flex-wrap:wrap;">
-        <button class="export-btn" style="padding:10px 18px" onclick="exportExcel()">📊 Export Full Excel Summary</button>
-        <button class="export-btn" style="padding:10px 18px" onclick="exportCsv()">📄 Export CSV</button>
-        <button class="export-btn" style="padding:10px 18px" onclick="exportDesignerReport()">👤 Export Designer Report</button>
+        <button class="exp-btn" style="padding:10px 16px" onclick="exportExcel()">📊 Full Excel Summary</button>
+        <button class="exp-btn" style="padding:10px 16px" onclick="exportCsv()">📄 CSV Export</button>
+        <button class="exp-btn" style="padding:10px 16px" onclick="exportDesignerReport()">👤 Designer Report</button>
       </div>
     </div>
   </div>
+
+  <!-- ══ PAGE: SETTINGS ══ -->
   <div class="page" id="page-settings">
-    <div class="section-head"><div><h2 style="font-size:1.2rem">Settings</h2></div></div>
+    <div style="font-size:1.1rem;font-weight:700;margin-bottom:4px">Settings</div>
     <div class="card" style="padding:24px;">
-      <p style="color:var(--muted2);font-size:.88rem;line-height:1.7">
-        This dashboard reads your Excel/CSV files locally in your browser — no data is ever sent to any server.<br><br>
-        <strong>Expected Excel columns:</strong> Designer, APS / Product Name, ASIN, EAN, Brand, Status, Date of Listing / Date Sending<br><br>
-        <strong>Tip:</strong> Use the "day to day.xlsx" file included in this folder as a template.
-      </p>
+      <div style="margin-bottom:20px;">
+        <div style="font-size:.85rem;font-weight:700;margin-bottom:10px;color:var(--cyan)">🔗 Google Sheets Connection</div>
+        <div style="font-size:.82rem;color:var(--muted2);line-height:1.8;">
+          <div>Sheet ID: <code style="background:rgba(255,255,255,0.06);padding:2px 7px;border-radius:5px;font-family:var(--mono);font-size:.75rem" id="settingsSheetId">—</code></div>
+          <div style="margin-top:6px;">Auto-refresh: Every <strong>5 minutes</strong></div>
+          <div style="margin-top:6px;"><button class="gs-sync-btn" onclick="loadFromGoogleSheets()" style="padding:8px 16px">↺ Force Sync Now</button></div>
+        </div>
+      </div>
+      <div style="border-top:1px solid var(--border);padding-top:16px;">
+        <div style="font-size:.85rem;font-weight:700;margin-bottom:8px;">Expected Sheet Columns</div>
+        <div style="font-size:.8rem;color:var(--muted2);line-height:1.9;">
+          Designer · APS / Product Name · ASIN · EAN · Brand · Status · Date of Listing
+        </div>
+      </div>
     </div>
   </div>
 
@@ -746,120 +495,161 @@ canvas{width:100%!important;max-height:220px!important;}
 <script src="xlsx.full.min.js"></script>
 <script src="chart.umd.min.js"></script>
 <script>
-/* ═══════════════════════════════════════════
-   GLOBALS & CONFIG
-═══════════════════════════════════════════ */
+/* ════════════════════════════════════════════
+   GOOGLE SHEETS CONFIG — edit these two lines
+════════════════════════════════════════════ */
+const GS_API_KEY  = 'AIzaSyBxdLYQlt8rN6zuTxpebOMF60z82KXmKlY';
+const GS_SHEET_ID = '1m5KpalxI7spitUPGFN5LgSz-Go8vKkifaNfzx2UAOrE';
+const GS_RANGE    = 'Sheet1';   // change to your sheet tab name if different
+const GS_REFRESH_MINUTES = 5;  // auto-refresh interval
+
+/* ════════════════════════════════════════════
+   GLOBALS
+════════════════════════════════════════════ */
 const ALIASES = {
-  designer: ["designer","design","name"],
-  product:  ["aps","product name","product","task","item","title"],
-  asin:     ["asin"],
-  ean:      ["ean"],
-  brand:    ["brand"],
-  status:   ["status","bot status"],
-  date:     ["date of listing","date sending","date sent","date","sending date","date of all photo uploading","listing date"]
+  designer:['designer','design','name'],
+  product: ['aps','product name','product','task','item','title'],
+  asin:    ['asin'],
+  ean:     ['ean'],
+  brand:   ['brand'],
+  status:  ['status','bot status'],
+  date:    ['date of listing','date sending','date sent','date','sending date','date of all photo uploading','listing date']
 };
-const COLORS = ['#6366f1','#06b6d4','#10b981','#f59e0b','#f43f5e','#a855f7','#ec4899','#14b8a6','#f97316','#8b5cf6','#22d3ee','#84cc16'];
-const BG_COLORS = COLORS.map(c => c + '33');
+const COLORS=['#6366f1','#06b6d4','#10b981','#f59e0b','#f43f5e','#a855f7','#ec4899','#14b8a6','#f97316','#8b5cf6','#22d3ee','#84cc16'];
 
-let rawRows = [], visibleRows = [], charts = {}, selectedDesigner = null;
-let sortField = 'date', sortDir = -1;
+let rawRows=[],visibleRows=[],charts={},selectedDesigner=null,sortField='date',sortDir=-1,refreshTimer=null;
 
-/* ═══════════════════════════════════════════
-   NAVIGATION
-═══════════════════════════════════════════ */
-function showPage(id) {
-  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
-  const page = document.getElementById('page-'+id);
-  if (page) page.classList.add('active');
-  const btn = document.querySelector(`[onclick="showPage('${id}')"]`);
-  if (btn) btn.classList.add('active');
-  if (id === 'leaderboard') renderFullLeaderboard();
-  if (id === 'coaching') renderCoachingPage();
-  if (id === 'insights') renderInsightsPage();
-  if (id === 'products') renderProductsTable();
-}
-
-/* ═══════════════════════════════════════════
-   FILE HANDLING
-═══════════════════════════════════════════ */
-document.addEventListener('DOMContentLoaded', () => {
-  const dz = document.getElementById('dropZone');
-  dz.addEventListener('dragover', e => { e.preventDefault(); dz.classList.add('drag-over'); });
-  dz.addEventListener('dragleave', () => dz.classList.remove('drag-over'));
-  dz.addEventListener('drop', e => { e.preventDefault(); dz.classList.remove('drag-over'); if(e.dataTransfer.files[0]) readFile(e.dataTransfer.files[0]); });
-  document.getElementById('rangePreset').addEventListener('change', function(){
-    document.getElementById('customDateWrap').style.display = this.value === 'custom' ? 'flex' : 'none';
-    filterAndRender();
-  });
+/* ════════════════════════════════════════════
+   INIT
+════════════════════════════════════════════ */
+document.addEventListener('DOMContentLoaded',()=>{
+  const dz=document.getElementById('dropZone');
+  dz.addEventListener('dragover',e=>{e.preventDefault();dz.classList.add('drag-over');});
+  dz.addEventListener('dragleave',()=>dz.classList.remove('drag-over'));
+  dz.addEventListener('drop',e=>{e.preventDefault();dz.classList.remove('drag-over');if(e.dataTransfer.files[0])readFile(e.dataTransfer.files[0]);});
+  document.getElementById('settingsSheetId').textContent=GS_SHEET_ID;
+  loadFromGoogleSheets();
 });
 
-function handleFileInput(e) { if(e.target.files[0]) readFile(e.target.files[0]); }
+function onPresetChange(){
+  document.getElementById('customDateWrap').style.display=
+    document.getElementById('rangePreset').value==='custom'?'flex':'none';
+  filterAndRender();
+}
 
-function readFile(file) {
-  setStatus('Reading ' + file.name + '…', '');
-  const reader = new FileReader();
-  reader.onload = ev => {
-    try {
-      const wb = XLSX.read(new Uint8Array(ev.target.result), { type:'array', cellDates:true });
-      const ws = wb.Sheets[wb.SheetNames[0]];
-      const rows = XLSX.utils.sheet_to_json(ws, { header:1, defval:'', raw:false });
+/* ════════════════════════════════════════════
+   GOOGLE SHEETS LIVE INTEGRATION
+════════════════════════════════════════════ */
+async function loadFromGoogleSheets(){
+  setStatus('🔄 Syncing from Google Sheets…','');
+  setGSIndicator('loading');
+  try{
+    const url=`https://sheets.googleapis.com/v4/spreadsheets/${GS_SHEET_ID}/values/${GS_RANGE}?key=${GS_API_KEY}`;
+    const res=await fetch(url);
+    if(!res.ok){
+      const err=await res.json().catch(()=>({}));
+      throw new Error(err.error?.message||`HTTP ${res.status} — make sure sheet is public (Anyone with link can view)`);
+    }
+    const data=await res.json();
+    const rows=data.values||[];
+    if(!rows.length) throw new Error('Sheet is empty');
+    parseRows(rows);
+    setGSIndicator('ok');
+    const el=document.getElementById('gsLastSync');
+    if(el) el.textContent='Last sync: '+new Date().toLocaleTimeString();
+    // Schedule next auto-refresh
+    clearTimeout(refreshTimer);
+    refreshTimer=setTimeout(loadFromGoogleSheets, GS_REFRESH_MINUTES*60*1000);
+  }catch(err){
+    console.error('GS Error:',err);
+    setStatus('⚠ Google Sheets: '+err.message,'err');
+    setGSIndicator('err');
+  }
+}
+
+function setGSIndicator(state){
+  const el=document.getElementById('gsIndicator');
+  if(!el) return;
+  const map={
+    loading:{color:'var(--amber)',text:'⟳ Syncing…'},
+    ok:     {color:'var(--green)',text:'✓ Live — Google Sheets'},
+    err:    {color:'var(--red)',  text:'✗ Check sheet access'}
+  };
+  const s=map[state]||map.err;
+  el.style.color=s.color;
+  el.textContent=s.text;
+}
+
+/* ════════════════════════════════════════════
+   FILE (MANUAL) HANDLING
+════════════════════════════════════════════ */
+function handleFileInput(e){if(e.target.files[0])readFile(e.target.files[0]);}
+
+function readFile(file){
+  setStatus('Reading '+file.name+'…','');
+  const reader=new FileReader();
+  reader.onload=ev=>{
+    try{
+      const wb=XLSX.read(new Uint8Array(ev.target.result),{type:'array',cellDates:true});
+      const ws=wb.Sheets[wb.SheetNames[0]];
+      const rows=XLSX.utils.sheet_to_json(ws,{header:1,defval:'',raw:false});
       parseRows(rows);
-    } catch(err) {
+      setGSIndicator('ok');
+    }catch(err){
       console.error(err);
-      setStatus('✗ Failed to parse. Upload a valid Excel/CSV.', 'err');
+      setStatus('Failed to parse file. Upload a valid Excel/CSV.','err');
     }
   };
-  reader.onerror = () => setStatus('✗ Cannot read file.', 'err');
+  reader.onerror=()=>setStatus('Cannot read file.','err');
   reader.readAsArrayBuffer(file);
 }
 
-function setStatus(msg, type) {
-  document.getElementById('statusText').textContent = msg;
-  const dot = document.getElementById('statusDot');
-  dot.className = 's-dot' + (type==='ok'?' ok':type==='err'?' err':'');
+function setStatus(msg,type){
+  document.getElementById('statusText').textContent=msg;
+  const d=document.getElementById('statusDot');
+  d.className='sdot'+(type==='ok'?' ok':type==='err'?' err':'');
 }
 
-/* ═══════════════════════════════════════════
+/* ════════════════════════════════════════════
    PARSING
-═══════════════════════════════════════════ */
-function normH(h) { return String(h||'').toLowerCase().replace(/[\s\-_\/]+/g,' ').replace(/[^a-z0-9 ]+/g,'').trim(); }
+════════════════════════════════════════════ */
+function normH(h){return String(h||'').toLowerCase().replace(/[\s\-_\/]+/g,' ').replace(/[^a-z0-9 ]+/g,'').trim();}
 
-function findHdrRow(rows) {
+function findHdr(rows){
   for(let i=0;i<Math.min(rows.length,15);i++){
-    const row = rows[i].map(normH);
-    if(ALIASES.designer.some(a=>row.includes(a)) || ALIASES.product.some(a=>row.includes(a))) return i;
+    const r=rows[i].map(normH);
+    if(ALIASES.designer.some(a=>r.includes(a))||ALIASES.product.some(a=>r.includes(a))) return i;
   }
   return -1;
 }
 
-function getVal(rec, aliases) {
-  for(const a of aliases) if(rec[a]!==undefined && String(rec[a]).trim()!=='') return rec[a];
+function getVal(rec,aliases){
+  for(const a of aliases) if(rec[a]!==undefined&&String(rec[a]).trim()!=='') return rec[a];
   return '';
 }
 
-function parseDate(v) {
+function parseDate(v){
   if(!v) return null;
-  if(v instanceof Date && !isNaN(v)) return v;
-  const s = String(v).trim();
+  if(v instanceof Date&&!isNaN(v)) return v;
+  const s=String(v).trim();
   if(!s) return null;
-  let d = new Date(s);
+  let d=new Date(s);
   if(!isNaN(d)) return d;
-  const n = parseFloat(s);
-  if(!isNaN(n) && n>1000) return new Date(Date.UTC(1899,11,30)+n*86400000);
-  const m = s.match(/^(\d{1,2})[\/\-\.](\d{1,2})[\/\-\.](\d{4})$/);
+  const n=parseFloat(s);
+  if(!isNaN(n)&&n>1000) return new Date(Date.UTC(1899,11,30)+n*86400000);
+  const m=s.match(/^(\d{1,2})[\/\-\.](\d{1,2})[\/\-\.](\d{4})$/);
   if(m) return new Date(+m[3],+m[2]-1,+m[1]);
   return null;
 }
 
-function parseRows(rows) {
-  const hi = findHdrRow(rows);
-  if(hi<0){ setStatus('✗ No header row found. Need Designer + Date columns.','err'); return; }
-  const headers = rows[hi].map(normH);
-  rawRows = rows.slice(hi+1).map(row=>{
+function parseRows(rows){
+  const hi=findHdr(rows);
+  if(hi<0){setStatus('No header row found. Need Designer + Date columns.','err');return;}
+  const headers=rows[hi].map(normH);
+  rawRows=rows.slice(hi+1).map(row=>{
     const rec={};
     headers.forEach((h,i)=>rec[h]=Array.isArray(row)?(row[i]??''):'');
-    return {
+    return{
       designer:String(getVal(rec,ALIASES.designer)).trim(),
       product: String(getVal(rec,ALIASES.product)).trim(),
       asin:    String(getVal(rec,ALIASES.asin)).trim(),
@@ -870,82 +660,68 @@ function parseRows(rows) {
     };
   }).filter(r=>r.designer||r.product);
 
-  if(!rawRows.length){ setStatus('✗ No valid rows found.','err'); return; }
+  if(!rawRows.length){setStatus('No valid rows found.','err');return;}
 
-  initDateFilters();
+  const dates=rawRows.map(r=>r.date).filter(Boolean).sort((a,b)=>a-b);
+  if(dates.length){
+    document.getElementById('startDate').value=fmtISO(dates[0]);
+    document.getElementById('endDate').value=fmtISO(dates[dates.length-1]);
+    document.getElementById('rangePreset').value='all';
+  }
+
+  const dCount=new Set(rawRows.map(r=>r.designer).filter(Boolean)).size;
+  setStatus(`✓ ${rawRows.length.toLocaleString()} records · ${dCount} designers · Live from Google Sheets`,'ok');
+  document.getElementById('topbarSub').textContent=`${rawRows.length.toLocaleString()} records · ${dCount} designers · Live`;
   filterAndRender();
-  setStatus(`✓ Loaded ${rawRows.length.toLocaleString()} records · ${new Set(rawRows.map(r=>r.designer).filter(Boolean)).size} designers`,'ok');
-  document.getElementById('topbarSub').textContent = `${rawRows.length.toLocaleString()} records loaded · ${new Set(rawRows.map(r=>r.designer).filter(Boolean)).size} designers`;
 }
 
-function initDateFilters() {
-  const dates = rawRows.map(r=>r.date).filter(Boolean).sort((a,b)=>a-b);
-  if(!dates.length) return;
-  document.getElementById('startDate').value = fmtISO(dates[0]);
-  document.getElementById('endDate').value = fmtISO(dates[dates.length-1]);
-}
+function fmtISO(d){return d instanceof Date?d.toISOString().slice(0,10):'';}
+function fmtD(d){if(!(d instanceof Date)||isNaN(d))return'—';return d.toLocaleDateString('en-GB',{day:'2-digit',month:'short',year:'numeric'});}
+function fmtS(d){if(!(d instanceof Date)||isNaN(d))return'—';return d.toLocaleDateString('en-GB',{day:'2-digit',month:'short'});}
+function initials(n){return n.split(' ').map(w=>w[0]||'').join('').slice(0,2).toUpperCase()||'?';}
+function colorFor(n){return COLORS[Math.abs([...n].reduce((a,c)=>a+c.charCodeAt(0),0))%COLORS.length];}
 
-function fmtISO(d){ return d instanceof Date ? d.toISOString().slice(0,10):''; }
-function fmtDisplay(d){ if(!(d instanceof Date)||isNaN(d)) return '—'; return d.toLocaleDateString('en-GB',{day:'2-digit',month:'short',year:'numeric'}); }
-function fmtShort(d){ if(!(d instanceof Date)||isNaN(d)) return '—'; return d.toLocaleDateString('en-GB',{day:'2-digit',month:'short'}); }
-function initials(name){ return name.split(' ').map(w=>w[0]||'').join('').slice(0,2).toUpperCase()||'?'; }
-function colorFor(name){ const c=COLORS[Math.abs([...name].reduce((a,c)=>a+c.charCodeAt(0),0))%COLORS.length]; return c; }
-
-/* ═══════════════════════════════════════════
+/* ════════════════════════════════════════════
    FILTERS
-═══════════════════════════════════════════ */
-function filterAndRender() {
+════════════════════════════════════════════ */
+function filterAndRender(){
   if(!rawRows.length) return;
-  const search = document.getElementById('searchInput').value.trim().toLowerCase();
-  const preset = document.getElementById('rangePreset').value;
-  const sd = document.getElementById('startDate').value ? new Date(document.getElementById('startDate').value) : null;
-  const ed = document.getElementById('endDate').value ? new Date(document.getElementById('endDate').value) : null;
-  const today = new Date(); today.setHours(23,59,59,999);
+  const search=document.getElementById('searchInput').value.trim().toLowerCase();
+  const preset=document.getElementById('rangePreset').value;
+  const sd=document.getElementById('startDate').value?new Date(document.getElementById('startDate').value):null;
+  const ed=document.getElementById('endDate').value?new Date(document.getElementById('endDate').value):null;
+  const today=new Date();today.setHours(23,59,59,999);
 
-  visibleRows = rawRows.filter(r => {
-    if(r.date) {
-      if(preset==='this-week'  && (today-r.date)/864e5 > 7)   return false;
-      if(preset==='this-month' && (today-r.date)/864e5 > 30)  return false;
-      if(preset==='this-year'  && (today-r.date)/864e5 > 365) return false;
-      if(preset==='custom'){
-        if(sd && r.date < sd) return false;
-        if(ed && r.date > ed) return false;
-      }
+  visibleRows=rawRows.filter(r=>{
+    if(r.date){
+      if(preset==='this-week'&&(today-r.date)/864e5>7) return false;
+      if(preset==='this-month'&&(today-r.date)/864e5>30) return false;
+      if(preset==='this-year'&&(today-r.date)/864e5>365) return false;
+      if(preset==='custom'){if(sd&&r.date<sd)return false;if(ed&&r.date>ed)return false;}
     }
-    if(search){
-      const hay=[r.designer,r.product,r.status,r.asin,r.ean,r.brand].join(' ').toLowerCase();
-      return hay.includes(search);
-    }
+    if(search){const hay=[r.designer,r.product,r.status,r.asin,r.ean,r.brand].join(' ').toLowerCase();return hay.includes(search);}
     return true;
   });
-
   renderDashboard();
 }
 
-/* ═══════════════════════════════════════════
-   BUILD SUMMARY
-═══════════════════════════════════════════ */
-function buildSummary(rows) {
-  const dCounts={}, dProducts={}, dBrandCount={};
-  const statusCounts={}, brandCounts={};
-  const weeklyMap={}, monthlyMap={};
-  const dayMap={}; // "designer|date"->count
-
+/* ════════════════════════════════════════════
+   SUMMARY
+════════════════════════════════════════════ */
+function buildSummary(rows){
+  const dCounts={},dProducts={},dBrand={},statusCounts={},brandCounts={},weeklyMap={},monthlyMap={},dayMap={};
   rows.forEach(r=>{
     const d=r.designer||'Unknown';
     dCounts[d]=(dCounts[d]||0)+1;
     if(!dProducts[d]) dProducts[d]=[];
     dProducts[d].push(r);
-
     const b=r.brand||'Unknown';
     brandCounts[b]=(brandCounts[b]||0)+1;
-    if(!dBrandCount[d]) dBrandCount[d]={};
-    dBrandCount[d][b]=(dBrandCount[d][b]||0)+1;
-
+    if(!dBrand[d]) dBrand[d]={};
+    dBrand[d][b]=(dBrand[d][b]||0)+1;
     if(r.status) statusCounts[r.status]=(statusCounts[r.status]||0)+1;
-
     if(r.date){
-      const wk=getWeekLabel(r.date);
+      const wk=weekLabel(r.date);
       const mo=r.date.toLocaleDateString('en-GB',{month:'short',year:'numeric'});
       weeklyMap[wk]=(weeklyMap[wk]||0)+1;
       monthlyMap[mo]=(monthlyMap[mo]||0)+1;
@@ -956,17 +732,12 @@ function buildSummary(rows) {
   });
 
   function topForDays(days){
-    const cut=new Date(); cut.setDate(cut.getDate()-days);
-    const c={};
-    rows.forEach(r=>{ if(r.date&&r.date>=cut) c[r.designer||'?']=(c[r.designer||'?']||0)+1; });
+    const cut=new Date();cut.setDate(cut.getDate()-days);
+    const c={};rows.forEach(r=>{if(r.date&&r.date>=cut)c[r.designer||'?']=(c[r.designer||'?']||0)+1;});
     const t=Object.entries(c).sort((a,b)=>b[1]-a[1])[0];
     return t?{name:t[0],count:t[1]}:{name:'—',count:0};
   }
 
-  const recordDay = Object.values(dayMap).sort((a,b)=>b.count-a.count)[0]||null;
-  const allDates = rows.filter(r=>r.date).map(r=>r.date).sort((a,b)=>a-b);
-
-  // Per-designer stats
   const dStats={};
   Object.keys(dCounts).forEach(d=>{
     const dr=dProducts[d];
@@ -977,660 +748,442 @@ function buildSummary(rows) {
     const cut30=new Date();cut30.setDate(cut30.getDate()-30);
     const week=dr.filter(r=>r.date&&r.date>=cut7).length;
     const month=dr.filter(r=>r.date&&r.date>=cut30).length;
-    const topBrand=Object.entries(dBrandCount[d]||{}).sort((a,b)=>b[1]-a[1])[0];
-    const dDayMap={};
-    dr.forEach(r=>{ if(r.date){ const k=fmtISO(r.date); dDayMap[k]=(dDayMap[k]||0)+1; }});
+    const topBrand=Object.entries(dBrand[d]||{}).sort((a,b)=>b[1]-a[1])[0];
+    const dDayMap={};dr.forEach(r=>{if(r.date){const k=fmtISO(r.date);dDayMap[k]=(dDayMap[k]||0)+1;}});
     const bestDay=Object.entries(dDayMap).sort((a,b)=>b[1]-a[1])[0];
-    dStats[d]={
-      total:dCounts[d], activeDays, avg,
-      week, month,
-      firstDate:dates[0]||null, lastDate:dates[dates.length-1]||null,
-      topBrand:topBrand?topBrand[0]:'—',
-      bestDay:bestDay?{date:bestDay[0],count:bestDay[1]}:null,
-      statusCounts:dr.reduce((acc,r)=>{ const s=r.status||'Unknown'; acc[s]=(acc[s]||0)+1; return acc;},{})
-    };
+    dStats[d]={total:dCounts[d],activeDays,avg,week,month,
+      firstDate:dates[0]||null,lastDate:dates[dates.length-1]||null,
+      topBrand:topBrand?topBrand[0]:'—',bestDay:bestDay?{date:bestDay[0],count:bestDay[1]}:null,
+      statusCounts:dr.reduce((acc,r)=>{const s=r.status||'Unknown';acc[s]=(acc[s]||0)+1;return acc;},{})};
   });
 
-  return {
-    totalRows:rows.length, dCounts, dProducts, dStats, statusCounts, brandCounts,
-    topWeek:topForDays(7), topMonth:topForDays(30), topYear:topForDays(365),
-    totalDesigners:Object.keys(dCounts).length,
-    weeklyMap, monthlyMap, recordDay, allDates,
-    firstDate:allDates[0]||null, lastDate:allDates[allDates.length-1]||null
+  const allDates=rows.filter(r=>r.date).map(r=>r.date).sort((a,b)=>a-b);
+  return{
+    totalRows:rows.length,dCounts,dProducts,dStats,statusCounts,brandCounts,
+    topWeek:topForDays(7),topMonth:topForDays(30),topYear:topForDays(365),
+    totalDesigners:Object.keys(dCounts).length,weeklyMap,monthlyMap,
+    recordDay:Object.values(dayMap).sort((a,b)=>b.count-a.count)[0]||null,
+    allDates,firstDate:allDates[0]||null,lastDate:allDates[allDates.length-1]||null
   };
 }
 
-function getWeekLabel(d) {
-  const t=new Date(d); t.setDate(t.getDate()-t.getDay());
-  return t.toLocaleDateString('en-GB',{day:'2-digit',month:'short'});
-}
+function weekLabel(d){const t=new Date(d);t.setDate(t.getDate()-t.getDay());return t.toLocaleDateString('en-GB',{day:'2-digit',month:'short'});}
 
-/* ═══════════════════════════════════════════
-   RENDER DASHBOARD
-═══════════════════════════════════════════ */
-function renderDashboard() {
-  const s = buildSummary(visibleRows);
-  renderHeroCards(s);
-  renderLeaderboard(s);
-  renderCharts(s);
-  renderRecord(s);
-  renderBottom(s);
-  renderActivity(s);
-  renderInsights(s);
-  renderPeriodKpis(s);
-  renderDetailTable(s);
-  if(selectedDesigner) renderAnalysis(selectedDesigner, s);
-}
-
-/* ── HERO CARDS ── */
-function renderHeroCards(s) {
-  function setHero(prefix,data){
-    document.getElementById(prefix+'Name').textContent = data.name;
-    document.getElementById(prefix+'Count').textContent = data.count.toLocaleString();
-    document.getElementById(prefix+'Avatar').textContent = data.name!=='—' ? initials(data.name) : '—';
-    const el=document.getElementById(prefix+'Delta');
-    el.textContent = data.name!=='—' ? `${data.count} products` : 'No data';
-    el.className='kpi-delta '+(data.count>0?'delta-up':'delta-nt');
-  }
-  setHero('topWeek', s.topWeek);
-  setHero('topMonth', s.topMonth);
-  setHero('topYear', s.topYear);
-  document.getElementById('kpiTotal').textContent = s.totalRows.toLocaleString();
-  document.getElementById('kpiDesigners').textContent = s.totalDesigners;
-  document.getElementById('kpiDesignerSub').textContent = s.firstDate ? `${fmtDisplay(s.firstDate)} → ${fmtDisplay(s.lastDate)}` : 'No data loaded';
-}
-
-/* ── LEADERBOARD ── */
-function renderLeaderboard(s) {
-  const el = document.getElementById('leaderboardList');
-  const top = Object.entries(s.dCounts).sort((a,b)=>b[1]-a[1]).slice(0,10);
-  if(!top.length){ el.innerHTML='<div class="empty-note">No data.</div>'; return; }
-  const maxVal = top[0][1];
-  el.innerHTML = `
-    <div class="lb-header"><span>Rank</span><span>Designer</span><span>Products</span><span>Output %</span><span>Δ Week</span></div>
-    ${top.map(([name,count],i)=>{
-      const pct = ((count/s.totalRows)*100).toFixed(1);
-      const barW = ((count/maxVal)*100).toFixed(1);
-      const stats = s.dStats[name]||{};
-      const weekPct = s.totalRows>0 ? stats.week||0 : 0;
-      const cl = i<3?`r${i+1}`:'';
-      return `<div class="lb-row ${selectedDesigner===name?'active':''}" onclick="selectDesigner('${name.replace(/'/g,"\\'")}')">
-        <div class="lb-rank ${cl}">${i+1}</div>
-        <div><div class="lb-name">${name}</div><div class="lb-sub">${stats.activeDays||0}d active · avg ${stats.avg||0}/d</div></div>
-        <div><div class="lb-count">${count.toLocaleString()}</div><div class="lb-bar-wrap" style="width:70px;margin-top:4px"><div class="lb-bar" style="width:${barW}%"></div></div></div>
-        <div style="text-align:right;font-size:.75rem;font-weight:600">${pct}%</div>
-        <div class="lb-delta ${weekPct>0?'':'delta-nt'}" style="color:${weekPct>0?'var(--green)':'var(--muted)'}">${weekPct>0?weekPct:'—'}</div>
-      </div>`;
-    }).join('')}`;
-}
-
-/* ── CHARTS ── */
-function mkChart(id, type, labels, data, label, colors, stacked){
-  if(charts[id]){ charts[id].destroy(); delete charts[id]; }
-  const ctx = document.getElementById(id);
-  if(!ctx) return;
-  const isDark = { color:'#64748b', grid:'rgba(255,255,255,0.04)' };
-  charts[id] = new Chart(ctx, {
-    type,
-    data:{ labels, datasets:[{ label, data,
-      backgroundColor: Array.isArray(colors) ? colors.map(c=>c+'99') : colors+'55',
-      borderColor: Array.isArray(colors) ? colors : colors,
-      borderWidth: type==='line'?2:0, fill:type==='line', tension:.4, pointRadius:2, pointHoverRadius:4
-    }]},
-    options:{
-      responsive:true, maintainAspectRatio:false,
-      plugins:{ legend:{ display:type==='pie'||type==='doughnut', position:'bottom', labels:{color:'#64748b',font:{size:10},boxWidth:10} } },
-      scales: type==='pie'||type==='doughnut' ? {} : {
-        x:{ ticks:{color:isDark.color,maxRotation:45,font:{size:9}}, grid:{color:isDark.grid} },
-        y:{ ticks:{color:isDark.color,font:{size:9}}, grid:{color:isDark.grid} }
-      }
-    }
+/* ════════════════════════════════════════════
+   RENDER
+════════════════════════════════════════════ */
+function renderDashboard(){
+  const s=buildSummary(visibleRows);
+  // Hero
+  ['Week','Month','Year'].forEach(p=>{
+    const d=s['top'+p];
+    document.getElementById('top'+p+'Name').textContent=d.name;
+    document.getElementById('top'+p+'Count').textContent=d.count?d.count.toLocaleString()+' products':'— products';
+    document.getElementById('top'+p+'Av').textContent=d.name!=='—'?initials(d.name):'—';
   });
+  document.getElementById('kpiTotal').textContent=s.totalRows.toLocaleString();
+  document.getElementById('kpiDesigners').textContent=s.totalDesigners;
+  document.getElementById('kpiDesignerSub').textContent=s.firstDate?fmtD(s.firstDate)+' → '+fmtD(s.lastDate):'—';
+  renderLeaderboard(s);renderCharts(s);renderRecord(s);renderBottom(s);
+  renderActivity(s);renderInsights(s);renderPeriodKpis(s);renderDetailTable(s);
+  renderDesignerPicker(s);
+  if(selectedDesigner) renderAnalysis(selectedDesigner,s);
 }
 
-function renderCharts(s) {
-  const wKeys = Object.keys(s.weeklyMap).slice(-16);
-  mkChart('chartWeekly','bar', wKeys, wKeys.map(k=>s.weeklyMap[k]), 'Products', '#6366f1');
-  const mKeys = Object.keys(s.monthlyMap).slice(-12);
-  mkChart('chartMonthly','line', mKeys, mKeys.map(k=>s.monthlyMap[k]), 'Products', '#06b6d4');
-  const top = Object.entries(s.dCounts).sort((a,b)=>b[1]-a[1]).slice(0,10);
-  mkChart('chartTop10','bar', top.map(x=>x[0]), top.map(x=>x[1]), 'Products', COLORS);
-  const pie = Object.entries(s.dCounts).sort((a,b)=>b[1]-a[1]).slice(0,8);
-  mkChart('chartDist','doughnut', pie.map(x=>x[0]), pie.map(x=>x[1]), 'Share', COLORS);
+function renderLeaderboard(s){
+  const el=document.getElementById('leaderboardList');
+  const top=Object.entries(s.dCounts).sort((a,b)=>b[1]-a[1]).slice(0,10);
+  if(!top.length){el.innerHTML='<div class="empty-note">No data.</div>';return;}
+  const maxV=top[0][1];
+  el.innerHTML=`<div class="lb-hdr"><span>Rank</span><span>Designer</span><span>Total</span><span>Output</span><span>Week</span></div>`
+    +top.map(([name,count],i)=>{
+      const st=s.dStats[name]||{};
+      const pct=((count/s.totalRows)*100).toFixed(1);
+      const bw=((count/maxV)*100).toFixed(1);
+      const cl=i<3?`r${i+1}`:'';
+      return`<div class="lb-row${selectedDesigner===name?' active':''}" onclick="selectDesigner('${name.replace(/'/g,"\\'")}')">
+        <div class="lb-rank ${cl}">${i+1}</div>
+        <div><div class="lb-name">${name}</div><div class="lb-sub">${st.activeDays||0}d · avg ${st.avg||0}/d</div></div>
+        <div><div class="lb-cnt">${count.toLocaleString()}</div><div class="lb-bar-w" style="width:64px;margin-top:3px"><div class="lb-bar" style="width:${bw}%"></div></div></div>
+        <div style="text-align:right;font-size:.73rem;font-weight:600">${pct}%</div>
+        <div class="lb-delta" style="color:${st.week?'var(--green)':'var(--muted)'}">${st.week||'—'}</div>
+      </div>`;
+    }).join('');
 }
 
-function setChartPeriod(chartId, period) {
-  // Toggle buttons visual
-  event.target.closest('.section-head-right').querySelectorAll('.tag-btn').forEach(b=>b.classList.remove('active'));
-  event.target.classList.add('active');
+function mkChart(id,type,labels,data,label,colors){
+  if(charts[id]){charts[id].destroy();delete charts[id];}
+  const ctx=document.getElementById(id);if(!ctx)return;
+  charts[id]=new Chart(ctx,{type,
+    data:{labels,datasets:[{label,data,
+      backgroundColor:Array.isArray(colors)?colors.map(c=>c+'99'):colors+'55',
+      borderColor:Array.isArray(colors)?colors:colors,
+      borderWidth:type==='line'?2:0,fill:type==='line',tension:.4,pointRadius:2}]},
+    options:{responsive:true,maintainAspectRatio:false,
+      plugins:{legend:{display:type==='pie'||type==='doughnut',position:'bottom',labels:{color:'#64748b',font:{size:9},boxWidth:9}}},
+      scales:type==='pie'||type==='doughnut'?{}:{
+        x:{ticks:{color:'#64748b',maxRotation:45,font:{size:9}},grid:{color:'rgba(255,255,255,0.04)'}},
+        y:{ticks:{color:'#64748b',font:{size:9}},grid:{color:'rgba(255,255,255,0.04)'}}
+      }}});
 }
 
-/* ── RECORD DAY ── */
-function renderRecord(s) {
-  const r = s.recordDay;
-  document.getElementById('recordName').textContent = r?r.designer:'—';
-  document.getElementById('recordMeta').textContent = r?`Peak output on ${fmtDisplay(r.date)}`:'No data loaded';
-  document.getElementById('recordCount').textContent = r?r.count:'—';
-  document.getElementById('recordDate').textContent = r?fmtShort(r.date):'—';
-  document.getElementById('recordBrand').textContent = r?(r.brand||'—'):'—';
-  document.getElementById('recordProduct').textContent = r?(r.product||'—'):'—';
+function renderCharts(s){
+  const wk=Object.keys(s.weeklyMap).slice(-14);
+  mkChart('chartWeekly','bar',wk,wk.map(k=>s.weeklyMap[k]),'Products','#6366f1');
+  const mo=Object.keys(s.monthlyMap).slice(-12);
+  mkChart('chartMonthly','line',mo,mo.map(k=>s.monthlyMap[k]),'Products','#06b6d4');
+  const top=Object.entries(s.dCounts).sort((a,b)=>b[1]-a[1]).slice(0,10);
+  mkChart('chartTop10','bar',top.map(x=>x[0]),top.map(x=>x[1]),'Products',COLORS);
+  const pie=Object.entries(s.dCounts).sort((a,b)=>b[1]-a[1]).slice(0,8);
+  mkChart('chartDist','doughnut',pie.map(x=>x[0]),pie.map(x=>x[1]),'Share',COLORS);
 }
 
-/* ── BOTTOM 3 ── */
-function renderBottom(s) {
-  const el = document.getElementById('bottomList');
-  const sorted = Object.entries(s.dCounts).sort((a,b)=>a[1]-b[1]);
-  const bottom = sorted.slice(0,3);
-  const maxVal = Object.values(s.dCounts).reduce((a,b)=>a+b,0)||1;
-  if(!bottom.length){ el.innerHTML='<div class="empty-note">No data.</div>'; return; }
-  el.innerHTML = bottom.map(([name,count])=>{
-    const pct = ((count/maxVal)*100).toFixed(1);
-    const col = colorFor(name);
-    return `<div class="bottom-item" onclick="selectDesigner('${name.replace(/'/g,"\\'")}')">
-      <div class="bottom-avatar" style="background:linear-gradient(135deg,${col},${col}88)">${initials(name)}</div>
-      <div style="flex:1;min-width:0">
-        <div class="bottom-name">${name}</div>
-        <div class="bottom-sub">${pct}% of total output</div>
-      </div>
-      <div style="text-align:right">
-        <div class="bottom-count">${count}</div>
-        <div class="bottom-perf">▼ Low</div>
-      </div>
+function renderRecord(s){
+  const r=s.recordDay;
+  document.getElementById('recordName').textContent=r?r.designer:'—';
+  document.getElementById('recordMeta').textContent=r?'Peak output on '+fmtD(r.date):'No data';
+  document.getElementById('recordCount').textContent=r?r.count:'—';
+  document.getElementById('recordDate').textContent=r?fmtS(r.date):'—';
+  document.getElementById('recordBrand').textContent=r?(r.brand||'—'):'—';
+  document.getElementById('recordProduct').textContent=r?(r.product||'—'):'—';
+}
+
+function renderBottom(s){
+  const el=document.getElementById('bottomList');
+  const bot=Object.entries(s.dCounts).sort((a,b)=>a[1]-b[1]).slice(0,3);
+  if(!bot.length){el.innerHTML='<div class="empty-note">No data.</div>';return;}
+  const tot=Object.values(s.dCounts).reduce((a,b)=>a+b,0)||1;
+  el.innerHTML=bot.map(([name,count])=>{
+    const col=colorFor(name);
+    return`<div class="bot-item" onclick="selectDesigner('${name.replace(/'/g,"\\'")}')">
+      <div class="bot-av" style="background:linear-gradient(135deg,${col},${col}88)">${initials(name)}</div>
+      <div style="flex:1;min-width:0"><div style="font-size:.82rem;font-weight:600">${name}</div><div style="font-size:.68rem;color:var(--muted)">${((count/tot)*100).toFixed(1)}% of total</div></div>
+      <div class="bot-cnt">${count}</div>
     </div>`;
   }).join('');
 }
 
-/* ── ACTIVITY FEED ── */
-function renderActivity(s) {
-  const el = document.getElementById('activityFeed');
-  const recent = [...visibleRows].filter(r=>r.date).sort((a,b)=>b.date-a.date).slice(0,12);
-  if(!recent.length){ el.innerHTML='<div class="empty-note">No activity.</div>'; return; }
-  el.innerHTML = recent.map(r=>{
-    const sc = statusClass(r.status);
-    return `<div class="activity-item">
-      <div class="activity-dot"></div>
-      <div class="activity-text">
-        <strong>${r.designer||'Unknown'}</strong> uploaded
-        <em>${r.product||'a product'}</em>${r.asin?` · ${r.asin}`:''}
-        ${r.status?`<span class="activity-status ${sc}" style="margin-left:4px">${r.status}</span>`:''}
-        <small>${fmtDisplay(r.date)}</small>
-      </div>
-    </div>`;
-  }).join('');
+function renderActivity(s){
+  const el=document.getElementById('activityFeed');
+  const recent=[...visibleRows].filter(r=>r.date).sort((a,b)=>b.date-a.date).slice(0,12);
+  if(!recent.length){el.innerHTML='<div class="empty-note">No activity.</div>';return;}
+  el.innerHTML=recent.map(r=>`<div class="act-item">
+    <div class="act-dot"></div>
+    <div class="act-text"><strong>${r.designer||'Unknown'}</strong> · ${r.product||'product'}
+      ${r.status?`<span class="sp ${spClass(r.status)}" style="margin-left:4px">${r.status}</span>`:''}
+      <br><span style="font-size:.68rem;color:var(--muted)">${fmtD(r.date)}</span>
+    </div></div>`).join('');
 }
 
-/* ── TRAINING INSIGHTS ── */
-function renderInsights(s) {
-  const el = document.getElementById('insightList');
-  const insights = generateInsights(s);
-  if(!insights.length){ el.innerHTML='<div class="empty-note">Not enough data.</div>'; return; }
-  el.innerHTML = insights.map(i=>`<div class="insight-item ${i.type||''}"><span class="insight-icon">${i.icon}</span> ${i.text}</div>`).join('');
+function renderInsights(s){
+  const el=document.getElementById('insightList');
+  const ins=genInsights(s);
+  if(!ins.length){el.innerHTML='<div class="empty-note">Not enough data.</div>';return;}
+  el.innerHTML=ins.map(i=>`<div class="ins-item ${i.type||''}">${i.icon} ${i.text}</div>`).join('');
 }
 
-function generateInsights(s) {
-  const ins = [];
-  const sorted = Object.entries(s.dCounts).sort((a,b)=>b[1]-a[1]);
-  const avg = s.totalRows / Math.max(s.totalDesigners,1);
-  const [top1,top2] = sorted;
-  const bottom = sorted[sorted.length-1];
-
-  if(top1) ins.push({icon:'🏆',type:'success',text:`<strong>${top1[0]}</strong> leads with ${top1[1].toLocaleString()} products — ${((top1[1]/s.totalRows)*100).toFixed(1)}% of total team output.`});
-  if(top2) ins.push({icon:'📊',type:'',text:`Gap between #1 and #2: ${(top1[1]-top2[1]).toLocaleString()} products. ${top1[1]-top2[1]>500?'Significant imbalance — consider redistributing workload.':'Healthy competition between top performers.'}`});
-  if(bottom && bottom[1]<avg*0.4) ins.push({icon:'⚠',type:'warn',text:`<strong>${bottom[0]}</strong> is significantly below team average (${bottom[1]} vs avg ${avg.toFixed(0)}). Immediate coaching intervention recommended.`});
-  if(s.recordDay) ins.push({icon:'⚡',type:'success',text:`Peak record: <strong>${s.recordDay.designer}</strong> completed ${s.recordDay.count} products in a single day on ${fmtDisplay(s.recordDay.date)}.`});
-  const doneCount = (s.statusCounts['Done']||0)+(s.statusCounts['DONE']||0)+(s.statusCounts['done']||0);
-  if(doneCount) ins.push({icon:'✅',type:'',text:`${doneCount.toLocaleString()} products marked Done — ${((doneCount/s.totalRows)*100).toFixed(1)}% completion rate across the team.`});
-  const lowDesigners = sorted.filter(([,c])=>c<avg*0.5);
-  if(lowDesigners.length>0) ins.push({icon:'🎯',type:'danger',text:`${lowDesigners.length} designer${lowDesigners.length>1?'s':''} (${lowDesigners.map(d=>d[0]).join(', ')}) are below 50% of team average. Schedule 1:1 coaching sessions.`});
-  const topMonth = s.topMonth;
-  if(topMonth.count>0) ins.push({icon:'📅',type:'',text:`This month's leader is <strong>${topMonth.name}</strong> with ${topMonth.count} products. Feature them in team stand-ups.`});
-
+function genInsights(s){
+  const ins=[];
+  const sorted=Object.entries(s.dCounts).sort((a,b)=>b[1]-a[1]);
+  const avg=s.totalRows/Math.max(s.totalDesigners,1);
+  const [t1,t2]=sorted;const bot=sorted[sorted.length-1];
+  if(t1) ins.push({icon:'🏆',type:'success',text:`<strong>${t1[0]}</strong> leads with ${t1[1].toLocaleString()} products — ${((t1[1]/s.totalRows)*100).toFixed(1)}% of total output.`});
+  if(t1&&t2) ins.push({icon:'📊',type:'',text:`Gap #1 vs #2: ${(t1[1]-t2[1]).toLocaleString()} products. ${t1[1]-t2[1]>500?'Significant — consider redistributing workload.':'Healthy competition.'}`});
+  if(bot&&bot[1]<avg*0.4) ins.push({icon:'⚠',type:'warn',text:`<strong>${bot[0]}</strong> is below 40% of team average (${bot[1]} vs avg ${avg.toFixed(0)}). Immediate coaching recommended.`});
+  if(s.recordDay) ins.push({icon:'⚡',type:'success',text:`Record: <strong>${s.recordDay.designer}</strong> completed ${s.recordDay.count} products on ${fmtD(s.recordDay.date)}.`});
+  const done=(s.statusCounts['Done']||0)+(s.statusCounts['DONE']||0)+(s.statusCounts['done']||0);
+  if(done) ins.push({icon:'✅',type:'',text:`${done.toLocaleString()} products Done — ${((done/s.totalRows)*100).toFixed(1)}% completion rate.`});
+  const low=sorted.filter(([,c])=>c<avg*0.5);
+  if(low.length) ins.push({icon:'🎯',type:'danger',text:`${low.length} designer${low.length>1?'s':''} below 50% avg: ${low.map(d=>d[0]).join(', ')}. Schedule coaching.`});
   return ins.slice(0,6);
 }
 
-/* ── PERIOD KPIs ── */
-function renderPeriodKpis(s) {
-  const el = document.getElementById('periodKpis');
-  const sorted = Object.entries(s.dCounts).sort((a,b)=>b[1]-a[1]);
-  const avg = (s.totalRows/Math.max(s.totalDesigners,1)).toFixed(1);
-  const doneCount = (s.statusCounts['Done']||0)+(s.statusCounts['DONE']||0)+(s.statusCounts['done']||0);
-  const completionRate = s.totalRows>0 ? ((doneCount/s.totalRows)*100).toFixed(1) : '0';
-  const activeBrands = Object.keys(s.brandCounts).length;
-  el.innerHTML = `
-    ${kpiRow('Total Products',s.totalRows.toLocaleString(),'Loaded period','var(--cyan)')}
-    ${kpiRow('Team Average',avg,'Products/designer','var(--accent)')}
-    ${kpiRow('Completion Rate',completionRate+'%','Done status','var(--green)')}
-    ${kpiRow('Active Brands',activeBrands,'Unique brands','var(--amber)')}
-    ${kpiRow('#1 This Period',sorted[0]?sorted[0][0]:'—',sorted[0]?sorted[0][1]+' products':'','var(--purple)')}
-  `;
+function renderPeriodKpis(s){
+  const el=document.getElementById('periodKpis');
+  const sorted=Object.entries(s.dCounts).sort((a,b)=>b[1]-a[1]);
+  const avg=(s.totalRows/Math.max(s.totalDesigners,1)).toFixed(1);
+  const done=(s.statusCounts['Done']||0)+(s.statusCounts['DONE']||0)+(s.statusCounts['done']||0);
+  const comp=s.totalRows>0?((done/s.totalRows)*100).toFixed(1):'0';
+  el.innerHTML=[
+    ['Total Products',s.totalRows.toLocaleString(),'var(--cyan)'],
+    ['Team Average',avg+'/designer','var(--accent)'],
+    ['Completion Rate',comp+'%','var(--green)'],
+    ['Active Brands',Object.keys(s.brandCounts).length,'var(--amber)'],
+    ['#1 This Period',sorted[0]?sorted[0][0]:'—','var(--purple)']
+  ].map(([l,v,c])=>`<div style="display:flex;align-items:center;justify-content:space-between;padding:7px 0;border-bottom:1px solid var(--border)">
+    <span style="font-size:.76rem;color:var(--muted)">${l}</span>
+    <span style="font-family:var(--mono);font-size:.88rem;font-weight:700;color:${c}">${v}</span>
+  </div>`).join('');
 }
 
-function kpiRow(label,val,sub,color){
-  return `<div style="display:flex;align-items:center;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--border)">
-    <div style="font-size:.78rem;color:var(--muted)">${label}</div>
-    <div style="text-align:right">
-      <div style="font-family:var(--mono);font-size:.9rem;font-weight:700;color:${color}">${val}</div>
-      <div style="font-size:.68rem;color:var(--muted)">${sub}</div>
-    </div>
-  </div>`;
-}
-
-/* ── DETAIL TABLE ── */
-function renderDetailTable(s) {
-  const el = document.getElementById('detailTableBody');
-  const sorted = [...visibleRows].sort((a,b)=>{
-    const va = a[sortField]||'', vb = b[sortField]||'';
-    if(va instanceof Date) return sortDir*(va-vb);
+function renderDetailTable(s){
+  const el=document.getElementById('detailTableBody');
+  const show=[...visibleRows].sort((a,b)=>{
+    const va=a[sortField]||'',vb=b[sortField]||'';
+    if(va instanceof Date)return sortDir*(va-vb);
     return sortDir*String(va).localeCompare(String(vb));
   }).slice(0,300);
-  document.getElementById('tableCount').textContent = `Showing ${Math.min(visibleRows.length,300)} of ${visibleRows.length.toLocaleString()} records`;
-  if(!sorted.length){ el.innerHTML='<tr><td colspan="7" style="text-align:center;color:var(--muted);padding:30px">No records.</td></tr>'; return; }
-  el.innerHTML = sorted.map(r=>`
-    <tr onclick="selectDesigner('${r.designer.replace(/'/g,"\\'")}')">
-      <td><span style="color:${colorFor(r.designer||'')};font-weight:600">${r.designer||'—'}</span></td>
-      <td style="max-width:220px;overflow:hidden;text-overflow:ellipsis">${r.product||'—'}</td>
-      <td style="font-family:var(--mono);font-size:.75rem">${r.asin||'—'}</td>
-      <td style="font-family:var(--mono);font-size:.75rem">${r.ean||'—'}</td>
-      <td>${r.brand||'—'}</td>
-      <td>${r.status?`<span class="activity-status ${statusClass(r.status)}">${r.status}</span>`:'—'}</td>
-      <td style="font-size:.78rem;color:var(--muted2)">${fmtDisplay(r.date)}</td>
-    </tr>`).join('');
+  document.getElementById('tableCount').textContent=`Showing ${Math.min(visibleRows.length,300)} of ${visibleRows.length.toLocaleString()} records`;
+  if(!show.length){el.innerHTML='<tr><td colspan="7" style="text-align:center;color:var(--muted);padding:28px">No records.</td></tr>';return;}
+  el.innerHTML=show.map(r=>`<tr onclick="selectDesigner('${r.designer.replace(/'/g,"\\'")}')">
+    <td style="color:${colorFor(r.designer||'')};font-weight:600">${r.designer||'—'}</td>
+    <td style="max-width:200px;overflow:hidden;text-overflow:ellipsis">${r.product||'—'}</td>
+    <td style="font-family:var(--mono);font-size:.72rem">${r.asin||'—'}</td>
+    <td style="font-family:var(--mono);font-size:.72rem">${r.ean||'—'}</td>
+    <td>${r.brand||'—'}</td>
+    <td>${r.status?`<span class="sp ${spClass(r.status)}">${r.status}</span>`:'—'}</td>
+    <td style="font-size:.76rem;color:var(--muted2)">${fmtD(r.date)}</td>
+  </tr>`).join('');
 }
 
-function sortTable(field){ if(sortField===field) sortDir*=-1; else { sortField=field; sortDir=-1; } filterAndRender(); }
+function sortTable(f){if(sortField===f)sortDir*=-1;else{sortField=f;sortDir=-1;}filterAndRender();}
+function spClass(s){const sl=(s||'').toLowerCase();if(sl==='done')return's-done';if(sl==='new')return's-new';if(sl==='old')return's-old';return's-oth';}
 
-function statusClass(s){
-  const sl=(s||'').toLowerCase();
-  if(sl==='done') return 's-done';
-  if(sl==='new') return 's-new';
-  if(sl==='old') return 's-old';
-  return 's-other';
-}
-
-/* ═══════════════════════════════════════════
-   DESIGNER ANALYSIS
-═══════════════════════════════════════════ */
-function selectDesigner(name) {
-  selectedDesigner = name;
-  const s = buildSummary(visibleRows);
+/* ════════════════════════════════════════════
+   DESIGNER SELECTION & ANALYSIS
+════════════════════════════════════════════ */
+function selectDesigner(name){
+  selectedDesigner=name;
+  const s=buildSummary(visibleRows);
   renderLeaderboard(s);
-  renderAnalysis(name, s);
-  renderDesignerDeepDive(name, s);
-  document.getElementById('analysisSubtitle').textContent = name;
-  document.getElementById('exportDesignerBtn').style.display='block';
-  // Update picker
-  document.querySelectorAll('.designer-picker-item').forEach(el=>{
-    el.classList.toggle('active', el.dataset.name===name);
-  });
+  renderAnalysis(name,s);
+  renderDesignerDeepDive(name,s);
+  document.getElementById('analysisSub').textContent=name;
+  document.getElementById('expDesBtn').style.display='block';
+  document.querySelectorAll('.dpi').forEach(el=>el.classList.toggle('active',el.dataset.name===name));
 }
 
-function renderAnalysis(name, s) {
-  const el = document.getElementById('analysisPanel');
-  const stats = s.dStats[name];
-  const rows = s.dProducts[name]||[];
-  if(!stats||!rows.length){ el.innerHTML='<div class="empty-note">No data.</div>'; return; }
-  const col = colorFor(name);
-  const pct = ((stats.total/s.totalRows)*100).toFixed(1);
-  const products = rows.slice(0,8);
-
-  el.innerHTML = `
-    <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px">
-      <div style="width:40px;height:40px;border-radius:10px;background:linear-gradient(135deg,${col},${col}88);display:grid;place-items:center;font-weight:800;flex-shrink:0">${initials(name)}</div>
-      <div><div style="font-size:.9rem;font-weight:700">${name}</div><div style="font-size:.72rem;color:var(--muted)">${stats.activeDays} active days · ${pct}% of team output</div></div>
+function renderAnalysis(name,s){
+  const el=document.getElementById('analysisPanel');
+  const stats=s.dStats[name];const rows=s.dProducts[name]||[];
+  if(!stats){el.innerHTML='<div class="empty-note">No data.</div>';return;}
+  const col=colorFor(name);const pct=((stats.total/s.totalRows)*100).toFixed(1);
+  el.innerHTML=`
+    <div style="display:flex;align-items:center;gap:9px;margin-bottom:12px">
+      <div style="width:38px;height:38px;border-radius:9px;background:linear-gradient(135deg,${col},${col}88);display:grid;place-items:center;font-weight:800;font-size:.85rem;flex-shrink:0">${initials(name)}</div>
+      <div><div style="font-size:.88rem;font-weight:700">${name}</div><div style="font-size:.7rem;color:var(--muted)">${stats.activeDays} active days · ${pct}% output</div></div>
     </div>
-    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:12px">
-      ${aStatCard(stats.total.toLocaleString(),'Total','var(--cyan)')}
-      ${aStatCard(stats.month,'This Month','var(--accent)')}
-      ${aStatCard(stats.avg+'/d','Daily Avg','var(--green)')}
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin-bottom:11px">
+      ${[['Total',stats.total.toLocaleString(),'var(--cyan)'],['Month',stats.month,'var(--accent)'],['Avg/d',stats.avg,'var(--green)']].map(([l,v,c])=>`<div style="background:rgba(255,255,255,0.04);border-radius:9px;padding:9px;text-align:center"><div style="font-family:var(--mono);font-size:1.1rem;font-weight:800;color:${c}">${v}</div><div style="font-size:.65rem;color:var(--muted);margin-top:2px">${l}</div></div>`).join('')}
     </div>
-    <div style="font-size:.72rem;color:var(--muted);margin-bottom:6px;text-transform:uppercase;letter-spacing:.08em">Recent Products</div>
-    ${products.map(r=>`
-      <div style="display:flex;align-items:center;gap:8px;padding:7px 0;border-bottom:1px solid rgba(255,255,255,0.04)">
-        <div style="flex:1;min-width:0">
-          <div style="font-size:.78rem;font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${r.product||'—'}</div>
-          <div style="font-size:.68rem;color:var(--muted)">${r.asin||''} ${fmtDisplay(r.date)}</div>
-        </div>
-        ${r.status?`<span class="activity-status ${statusClass(r.status)}">${r.status}</span>`:''}
-      </div>`).join('')}
-    ${rows.length>8?`<div style="font-size:.72rem;color:var(--muted);text-align:center;padding:6px">+${rows.length-8} more records</div>`:''}
-  `;
+    <div style="font-size:.7rem;color:var(--muted);margin-bottom:5px;text-transform:uppercase;letter-spacing:.07em">Recent</div>
+    ${rows.slice(0,7).map(r=>`<div style="display:flex;align-items:center;gap:7px;padding:6px 0;border-bottom:1px solid rgba(255,255,255,0.04)">
+      <div style="flex:1;min-width:0"><div style="font-size:.76rem;font-weight:500;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${r.product||'—'}</div><div style="font-size:.66rem;color:var(--muted)">${fmtD(r.date)}</div></div>
+      ${r.status?`<span class="sp ${spClass(r.status)}">${r.status}</span>`:''}
+    </div>`).join('')}
+    ${rows.length>7?`<div style="font-size:.7rem;color:var(--muted);text-align:center;padding:5px">+${rows.length-7} more</div>`:''}`;
 }
 
-function aStatCard(val,label,color){
-  return `<div style="background:rgba(255,255,255,0.04);border-radius:10px;padding:10px;text-align:center">
-    <div style="font-family:var(--mono);font-size:1.2rem;font-weight:800;color:${color}">${val}</div>
-    <div style="font-size:.67rem;color:var(--muted);margin-top:2px">${label}</div>
-  </div>`;
-}
-
-/* ═══════════════════════════════════════════
-   DESIGNER DEEP DIVE PAGE
-═══════════════════════════════════════════ */
-function renderDesignerDeepDive(name, s) {
-  const el = document.getElementById('deepDivePanel');
-  const stats = s.dStats[name];
-  const rows = s.dProducts[name]||[];
-  if(!stats){ el.innerHTML='<div class="card" style="padding:30px;text-align:center;color:var(--muted)">No data for this designer.</div>'; return; }
-  const col = colorFor(name);
-  const pct = ((stats.total/s.totalRows)*100).toFixed(1);
-  const doneCount = rows.filter(r=>['done','Done','DONE'].includes(r.status||'')).length;
-  const compRate = rows.length>0?((doneCount/rows.length)*100).toFixed(1):'0';
-
-  // Build monthly trend
-  const moMap={};
-  rows.forEach(r=>{ if(r.date){ const k=r.date.toLocaleDateString('en-GB',{month:'short',year:'numeric'}); moMap[k]=(moMap[k]||0)+1; }});
-  const moKeys=Object.keys(moMap).slice(-8), moVals=moKeys.map(k=>moMap[k]);
-
-  // Day-of-week pattern
-  const dow=['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
-  const dowCounts=[0,0,0,0,0,0,0];
-  rows.forEach(r=>{ if(r.date) dowCounts[r.date.getDay()]++; });
-
-  el.innerHTML = `
-    <div style="display:grid;gap:16px">
-      <!-- Header -->
-      <div class="card" style="display:flex;align-items:center;gap:14px;padding:18px">
-        <div style="width:52px;height:52px;border-radius:14px;background:linear-gradient(135deg,${col},${col}88);display:grid;place-items:center;font-weight:800;font-size:1.2rem;flex-shrink:0">${initials(name)}</div>
-        <div style="flex:1">
-          <div style="font-size:1.2rem;font-weight:800">${name}</div>
-          <div style="font-size:.78rem;color:var(--muted);margin-top:2px">${stats.activeDays} active days · Top brand: ${stats.topBrand} · ${pct}% of team output</div>
-        </div>
-        <div style="display:flex;gap:8px">
-          <button class="export-btn" onclick="exportDesignerReport()">Export Report</button>
-        </div>
-      </div>
-
-      <!-- KPI Row -->
-      <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:12px">
-        ${deepKpi(stats.total.toLocaleString(),'Total Products','var(--cyan)')}
-        ${deepKpi(stats.month,'This Month','var(--accent)')}
-        ${deepKpi(stats.week,'This Week','var(--purple)')}
-        ${deepKpi(stats.avg+'/day','Daily Average','var(--green)')}
-        ${deepKpi(compRate+'%','Completion Rate','var(--amber)')}
-      </div>
-
-      <!-- Charts Row -->
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
-        <div class="card">
-          <div style="font-size:.85rem;font-weight:700;margin-bottom:12px">Monthly Output Trend</div>
-          <canvas id="deepMoChart" style="max-height:160px!important"></canvas>
-        </div>
-        <div class="card">
-          <div style="font-size:.85rem;font-weight:700;margin-bottom:12px">Day-of-Week Pattern</div>
-          <canvas id="deepDowChart" style="max-height:160px!important"></canvas>
-        </div>
-      </div>
-
-      <!-- Products Table -->
-      <div class="card" style="padding:0;overflow:hidden">
-        <div style="padding:14px 16px;border-bottom:1px solid var(--border);font-size:.85rem;font-weight:700">
-          All ${rows.length} Products (last 50 shown)
-        </div>
-        <div style="overflow-x:auto">
-          <table class="data-table">
-            <thead><tr><th>Product (APS)</th><th>ASIN</th><th>EAN</th><th>Brand</th><th>Status</th><th>Date</th></tr></thead>
-            <tbody>${rows.slice(0,50).map(r=>`
-              <tr>
-                <td style="max-width:240px;overflow:hidden;text-overflow:ellipsis">${r.product||'—'}</td>
-                <td style="font-family:var(--mono);font-size:.72rem">${r.asin||'—'}</td>
-                <td style="font-family:var(--mono);font-size:.72rem">${r.ean||'—'}</td>
-                <td>${r.brand||'—'}</td>
-                <td>${r.status?`<span class="activity-status ${statusClass(r.status)}">${r.status}</span>`:'—'}</td>
-                <td style="color:var(--muted2);font-size:.78rem">${fmtDisplay(r.date)}</td>
-              </tr>`).join('')}
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </div>
-  `;
-
-  // Render charts after DOM update
-  setTimeout(()=>{
-    mkChart('deepMoChart','bar',moKeys,moVals,'Products',col);
-    if(charts.deepDowChart) charts.deepDowChart.destroy();
-    charts.deepDowChart = new Chart(document.getElementById('deepDowChart'),{
-      type:'radar',
-      data:{labels:dow,datasets:[{label:'Products',data:dowCounts,backgroundColor:col+'33',borderColor:col,borderWidth:2,pointRadius:3}]},
-      options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{r:{ticks:{color:'#64748b',font:{size:9}},grid:{color:'rgba(255,255,255,0.07)'},pointLabels:{color:'#94a3b8',font:{size:10}}}}}
-    });
-  },50);
-}
-
-function deepKpi(val,label,color){
-  return `<div style="background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:12px;padding:14px;text-align:center">
-    <div style="font-family:var(--mono);font-size:1.4rem;font-weight:800;color:${color}">${val}</div>
-    <div style="font-size:.7rem;color:var(--muted);margin-top:4px;text-transform:uppercase;letter-spacing:.06em">${label}</div>
-  </div>`;
-}
-
-/* ═══════════════════════════════════════════
-   DESIGNER PICKER
-═══════════════════════════════════════════ */
-function renderDesignerPicker(s) {
-  const el = document.getElementById('designerPickerList');
-  const sorted = Object.entries(s.dCounts).sort((a,b)=>b[1]-a[1]);
-  if(!sorted.length){ el.innerHTML='<div class="empty-note">No designers.</div>'; return; }
-  el.innerHTML = sorted.map(([name,count])=>{
+function renderDesignerPicker(s){
+  const el=document.getElementById('designerPickerList');
+  const sorted=Object.entries(s.dCounts).sort((a,b)=>b[1]-a[1]);
+  if(!sorted.length){el.innerHTML='<div class="empty-note">No data.</div>';return;}
+  el.innerHTML=sorted.map(([name,count])=>{
     const col=colorFor(name);
-    return `<div class="designer-picker-item nav-item ${selectedDesigner===name?'active':''}" data-name="${name}" onclick="selectDesigner('${name.replace(/'/g,"\\'")}')" style="margin-bottom:2px">
-      <div style="width:28px;height:28px;border-radius:7px;background:linear-gradient(135deg,${col},${col}88);display:grid;place-items:center;font-size:.7rem;font-weight:700;flex-shrink:0">${initials(name)}</div>
-      <div style="flex:1;min-width:0">
-        <div style="font-size:.82rem;font-weight:600;overflow:hidden;text-overflow:ellipsis">${name}</div>
-        <div style="font-size:.68rem;color:var(--muted)">${count} products</div>
-      </div>
+    return`<div class="nav-item dpi${selectedDesigner===name?' active':''}" data-name="${name}" onclick="selectDesigner('${name.replace(/'/g,"\\'")}');showPage('designer')">
+      <div style="width:26px;height:26px;border-radius:7px;background:linear-gradient(135deg,${col},${col}88);display:grid;place-items:center;font-size:.68rem;font-weight:700;flex-shrink:0">${initials(name)}</div>
+      <span>${name}</span>
+      <span style="margin-left:auto;font-size:.7rem;color:var(--muted);font-family:var(--mono)">${count}</span>
     </div>`;
   }).join('');
 }
 
-/* ═══════════════════════════════════════════
-   FULL LEADERBOARD PAGE
-═══════════════════════════════════════════ */
-function renderFullLeaderboard() {
+function renderDesignerDeepDive(name,s){
+  const el=document.getElementById('deepDivePanel');
+  const stats=s.dStats[name];const rows=s.dProducts[name]||[];
+  if(!stats){el.innerHTML='<div class="card" style="padding:28px;text-align:center;color:var(--muted)">No data.</div>';return;}
+  const col=colorFor(name);
+  const done=rows.filter(r=>['done','Done','DONE'].includes(r.status||'')).length;
+  const comp=rows.length>0?((done/rows.length)*100).toFixed(1):'0';
+  const moMap={};rows.forEach(r=>{if(r.date){const k=r.date.toLocaleDateString('en-GB',{month:'short',year:'numeric'});moMap[k]=(moMap[k]||0)+1;}});
+  const moK=Object.keys(moMap).slice(-8),moV=moK.map(k=>moMap[k]);
+  const dow=[0,0,0,0,0,0,0];rows.forEach(r=>{if(r.date)dow[r.date.getDay()]++;});
+
+  el.innerHTML=`<div style="display:grid;gap:14px">
+    <div class="card" style="display:flex;align-items:center;gap:12px;padding:16px">
+      <div style="width:48px;height:48px;border-radius:13px;background:linear-gradient(135deg,${col},${col}88);display:grid;place-items:center;font-weight:800;font-size:1.1rem;flex-shrink:0">${initials(name)}</div>
+      <div style="flex:1"><div style="font-size:1.1rem;font-weight:800">${name}</div><div style="font-size:.75rem;color:var(--muted)">Top brand: ${stats.topBrand} · ${stats.activeDays} active days</div></div>
+      <button class="exp-btn" onclick="exportDesignerReport()">Export Report</button>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:11px">
+      ${[['Total',stats.total.toLocaleString(),'var(--cyan)'],['Month',stats.month,'var(--accent)'],['Week',stats.week,'var(--purple)'],['Avg/Day',stats.avg,'var(--green)'],['Done%',comp+'%','var(--amber)']].map(([l,v,c])=>`<div style="background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:11px;padding:13px;text-align:center"><div style="font-family:var(--mono);font-size:1.3rem;font-weight:800;color:${c}">${v}</div><div style="font-size:.67rem;color:var(--muted);margin-top:3px;text-transform:uppercase;letter-spacing:.06em">${l}</div></div>`).join('')}
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px">
+      <div class="card"><div style="font-size:.83rem;font-weight:700;margin-bottom:10px">Monthly Output</div><canvas id="deepMo" style="max-height:160px!important"></canvas></div>
+      <div class="card"><div style="font-size:.83rem;font-weight:700;margin-bottom:10px">Day-of-Week Pattern</div><canvas id="deepDow" style="max-height:160px!important"></canvas></div>
+    </div>
+    <div class="card" style="padding:0;overflow:hidden">
+      <div style="padding:12px 14px;border-bottom:1px solid var(--border);font-size:.83rem;font-weight:700">All ${rows.length} Products (first 50)</div>
+      <div style="overflow-x:auto"><table class="dt">
+        <thead><tr><th>Product (APS)</th><th>ASIN</th><th>EAN</th><th>Brand</th><th>Status</th><th>Date</th></tr></thead>
+        <tbody>${rows.slice(0,50).map(r=>`<tr><td style="max-width:220px;overflow:hidden;text-overflow:ellipsis">${r.product||'—'}</td><td style="font-family:var(--mono);font-size:.7rem">${r.asin||'—'}</td><td style="font-family:var(--mono);font-size:.7rem">${r.ean||'—'}</td><td>${r.brand||'—'}</td><td>${r.status?`<span class="sp ${spClass(r.status)}">${r.status}</span>`:'—'}</td><td style="color:var(--muted2);font-size:.76rem">${fmtD(r.date)}</td></tr>`).join('')}</tbody>
+      </table></div>
+    </div>
+  </div>`;
+
+  setTimeout(()=>{
+    mkChart('deepMo','bar',moK,moV,'Products',col);
+    if(charts.deepDow){charts.deepDow.destroy();delete charts.deepDow;}
+    const ctx=document.getElementById('deepDow');
+    if(ctx) charts.deepDow=new Chart(ctx,{type:'radar',data:{labels:['Sun','Mon','Tue','Wed','Thu','Fri','Sat'],datasets:[{label:'Products',data:dow,backgroundColor:col+'33',borderColor:col,borderWidth:2,pointRadius:3}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{r:{ticks:{color:'#64748b',font:{size:9}},grid:{color:'rgba(255,255,255,0.07)'},pointLabels:{color:'#94a3b8',font:{size:9}}}}}});
+  },60);
+}
+
+/* ════════════════════════════════════════════
+   FULL LEADERBOARD & COACHING PAGES
+════════════════════════════════════════════ */
+function renderFullLeaderboard(){
   if(!rawRows.length) return;
-  const s = buildSummary(visibleRows);
-  const el = document.getElementById('fullLeaderboardBody');
-  const sorted = Object.entries(s.dCounts).sort((a,b)=>b[1]-a[1]);
-  el.innerHTML = sorted.map(([name,count],i)=>{
-    const stats = s.dStats[name]||{};
-    const col = colorFor(name);
-    const pct = ((count/s.totalRows)*100).toFixed(1);
-    const cl = i<3?`r${i+1}`:'';
-    // Mini sparkline
-    const rows = s.dProducts[name]||[];
-    const moMap={};
-    rows.forEach(r=>{ if(r.date){ const k=r.date.toLocaleDateString('en-GB',{month:'short',year:'numeric'}); moMap[k]=(moMap[k]||0)+1; }});
-    const moVals = Object.values(moMap).slice(-6);
-    const maxM = Math.max(...moVals,1);
-    const spark = moVals.map(v=>`<div class="sparkline-bar" style="height:${Math.max((v/maxM)*28,2)}px;background:${col}99"></div>`).join('');
-    return `<tr style="cursor:pointer" onclick="selectDesigner('${name.replace(/'/g,"\\'")}')" class="${selectedDesigner===name?'lb-row active':''}">
-      <td><div class="lb-rank ${cl}" style="display:inline-grid;width:28px;height:28px">${i+1}</div></td>
+  const s=buildSummary(visibleRows);
+  const el=document.getElementById('fullLbBody');
+  const sorted=Object.entries(s.dCounts).sort((a,b)=>b[1]-a[1]);
+  el.innerHTML=sorted.map(([name,count],i)=>{
+    const st=s.dStats[name]||{},col=colorFor(name),pct=((count/s.totalRows)*100).toFixed(1);
+    const cl=i<3?`r${i+1}`:'';
+    const dr=s.dProducts[name]||[];
+    const moMap={};dr.forEach(r=>{if(r.date){const k=r.date.toLocaleDateString('en-GB',{month:'short',year:'numeric'});moMap[k]=(moMap[k]||0)+1;}});
+    const moV=Object.values(moMap).slice(-6);const maxM=Math.max(...moV,1);
+    const spark=moV.map(v=>`<div class="spark-b" style="height:${Math.max((v/maxM)*22,2)}px;background:${col}99"></div>`).join('');
+    return`<tr style="cursor:pointer" onclick="selectDesigner('${name.replace(/'/g,"\\'")}')" >
+      <td><div class="lb-rank ${cl}" style="display:inline-grid;width:26px;height:26px">${i+1}</div></td>
       <td><div style="display:flex;align-items:center;gap:8px">
-        <div style="width:32px;height:32px;border-radius:8px;background:linear-gradient(135deg,${col},${col}88);display:grid;place-items:center;font-weight:700;font-size:.72rem;flex-shrink:0">${initials(name)}</div>
-        <div><div style="font-weight:600;font-size:.85rem">${name}</div><div style="font-size:.7rem;color:var(--muted)">Top: ${stats.topBrand||'—'}</div></div>
+        <div style="width:30px;height:30px;border-radius:7px;background:linear-gradient(135deg,${col},${col}88);display:grid;place-items:center;font-weight:700;font-size:.7rem;flex-shrink:0">${initials(name)}</div>
+        <div><div style="font-weight:600;font-size:.83rem">${name}</div><div style="font-size:.68rem;color:var(--muted)">${pct}%</div></div>
       </div></td>
       <td style="font-family:var(--mono);font-weight:700;color:var(--cyan)">${count.toLocaleString()}</td>
-      <td style="font-family:var(--mono)">${stats.month||0}</td>
-      <td style="font-family:var(--mono)">${stats.week||0}</td>
-      <td style="color:var(--muted2)">${stats.avg||0}</td>
-      <td style="max-width:150px;overflow:hidden;text-overflow:ellipsis;font-size:.78rem;color:var(--muted2)">${stats.topBrand||'—'}</td>
-      <td style="font-size:.78rem">${stats.bestDay?`${stats.bestDay.count} on ${fmtDisplay(new Date(stats.bestDay.date))}`:'—'}</td>
-      <td><div class="sparkline">${spark}</div></td>
-      <td><button class="tag-btn" onclick="event.stopPropagation();showPage('designer');selectDesigner('${name.replace(/'/g,"\\'")}')" style="padding:4px 10px;font-size:.72rem">Analyse →</button></td>
+      <td style="font-family:var(--mono)">${st.month||0}</td>
+      <td style="font-family:var(--mono)">${st.week||0}</td>
+      <td style="color:var(--muted2)">${st.avg||0}</td>
+      <td style="color:var(--muted2)">${st.activeDays||0}</td>
+      <td style="font-size:.76rem;color:var(--muted2)">${st.topBrand||'—'}</td>
+      <td style="font-size:.76rem">${st.bestDay?st.bestDay.count+' on '+fmtD(new Date(st.bestDay.date)):'—'}</td>
+      <td><div class="spark">${spark}</div></td>
+      <td><button class="tag-btn" onclick="event.stopPropagation();selectDesigner('${name.replace(/'/g,"\\'")}')" style="padding:3px 9px;font-size:.7rem">Analyse →</button></td>
     </tr>`;
   }).join('');
 }
 
-/* ═══════════════════════════════════════════
-   COACHING PAGE
-═══════════════════════════════════════════ */
-function renderCoachingPage() {
+function renderCoachingPage(){
   if(!rawRows.length) return;
-  const s = buildSummary(visibleRows);
-  const el = document.getElementById('coachingContent');
-  const sorted = Object.entries(s.dCounts).sort((a,b)=>b[1]-a[1]);
-  const avg = s.totalRows/Math.max(s.totalDesigners,1);
-  const max = sorted[0]?.[1]||1;
-
-  const cards = sorted.map(([name,count])=>{
-    const stats = s.dStats[name]||{};
-    const col = colorFor(name);
-    const score = Math.min(100, Math.round((count/max)*60 + (stats.activeDays/30)*20 + (stats.avg/10)*20));
-    const tier = score>=80?{label:'Elite',color:'var(--green)',actions:['Mentor junior designers','Lead weekly reviews','Expand to new categories']}
-                :score>=60?{label:'Strong',color:'var(--cyan)',actions:['Increase daily target by 10%','Cross-train on new products','Pair with #1 performer']}
-                :score>=40?{label:'Developing',color:'var(--amber)',actions:['Daily check-in sessions','Set micro-goals (5 products/day)','Review quality standards']}
-                :{label:'Needs Help',color:'var(--red)',actions:['1:1 coaching session ASAP','Identify blockers and bottlenecks','Simplify workload temporarily']};
-
-    const pct = ((count/s.totalRows)*100).toFixed(1);
-    return `<div class="coaching-card">
-      <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px">
-        <div style="width:40px;height:40px;border-radius:10px;background:linear-gradient(135deg,${col},${col}88);display:grid;place-items:center;font-weight:800;font-size:.9rem;flex-shrink:0">${initials(name)}</div>
-        <div style="flex:1"><div style="font-weight:700;font-size:.9rem">${name}</div><div style="font-size:.7rem;color:var(--muted)">${count} products · ${pct}%</div></div>
-        <div style="text-align:right">
-          <div style="font-family:var(--mono);font-size:1.4rem;font-weight:800;color:${tier.color}">${score}</div>
-          <div style="font-size:.65rem;color:${tier.color};font-weight:600;text-transform:uppercase">${tier.label}</div>
+  const s=buildSummary(visibleRows);
+  const el=document.getElementById('coachingContent');
+  const sorted=Object.entries(s.dCounts).sort((a,b)=>b[1]-a[1]);
+  const avg=s.totalRows/Math.max(s.totalDesigners,1);const max=sorted[0]?.[1]||1;
+  el.innerHTML=`
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:18px">
+      ${[['Team Health',(sorted.map(([,c])=>Math.min(100,Math.round((c/max)*80))).reduce((a,b)=>a+b,0)/Math.max(sorted.length,1)).toFixed(0)+'%','var(--cyan)'],
+         ['Elite (≥150% avg)',sorted.filter(([,c])=>c>=avg*1.5).length,'var(--green)'],
+         ['Need Coaching',sorted.filter(([,c])=>c<avg*0.5).length,'var(--red)'],
+         ['Avg Output',avg.toFixed(0)+'/d','var(--amber)']
+      ].map(([l,v,c])=>`<div class="kpi-card"><div class="kpi-label">${l}</div><div class="kpi-val" style="color:${c};font-size:1.5rem">${v}</div></div>`).join('')}
+    </div>
+    <div style="font-size:.85rem;font-weight:700;margin-bottom:12px">Individual Coaching Plans</div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:14px">
+    ${sorted.map(([name,count])=>{
+      const st=s.dStats[name]||{};const col=colorFor(name);
+      const score=Math.min(100,Math.round((count/max)*60+(st.activeDays/30)*20+(parseFloat(st.avg)/10)*20));
+      const tier=score>=80?{l:'Elite',c:'var(--green)',a:['Mentor junior designers','Lead weekly reviews','Expand to new product categories']}
+                :score>=60?{l:'Strong',c:'var(--cyan)',a:['Increase daily target by 10%','Cross-train on new products','Pair with #1 performer']}
+                :score>=40?{l:'Developing',c:'var(--amber)',a:['Daily check-in sessions','Set micro-goals (5 products/day)','Review quality standards together']}
+                :{l:'Needs Help',c:'var(--red)',a:['1:1 coaching session ASAP','Identify and remove blockers','Simplify workload temporarily']};
+      return`<div class="coach-card">
+        <div style="display:flex;align-items:center;gap:9px;margin-bottom:10px">
+          <div style="width:38px;height:38px;border-radius:9px;background:linear-gradient(135deg,${col},${col}88);display:grid;place-items:center;font-weight:800;font-size:.88rem;flex-shrink:0">${initials(name)}</div>
+          <div style="flex:1"><div style="font-weight:700;font-size:.88rem">${name}</div><div style="font-size:.68rem;color:var(--muted)">${count} products · ${((count/s.totalRows)*100).toFixed(1)}%</div></div>
+          <div style="text-align:right"><div style="font-family:var(--mono);font-size:1.3rem;font-weight:800;color:${tier.c}">${score}</div><div style="font-size:.63rem;color:${tier.c};font-weight:600;text-transform:uppercase">${tier.l}</div></div>
         </div>
-      </div>
-      <div class="coaching-bar"><div style="height:100%;width:${score}%;border-radius:99px;background:${tier.color}"></div></div>
-      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin:10px 0 10px">
-        <div style="text-align:center;background:rgba(255,255,255,0.04);border-radius:8px;padding:7px"><div style="font-size:.85rem;font-weight:700;font-family:var(--mono)">${stats.month||0}</div><div style="font-size:.65rem;color:var(--muted)">Month</div></div>
-        <div style="text-align:center;background:rgba(255,255,255,0.04);border-radius:8px;padding:7px"><div style="font-size:.85rem;font-weight:700;font-family:var(--mono)">${stats.avg||0}</div><div style="font-size:.65rem;color:var(--muted)">Avg/Day</div></div>
-        <div style="text-align:center;background:rgba(255,255,255,0.04);border-radius:8px;padding:7px"><div style="font-size:.85rem;font-weight:700;font-family:var(--mono)">${stats.activeDays||0}</div><div style="font-size:.65rem;color:var(--muted)">Active Days</div></div>
-      </div>
-      <div style="font-size:.72rem;color:var(--muted);margin-bottom:6px;text-transform:uppercase;letter-spacing:.08em;font-weight:600">Recommended Actions</div>
-      ${tier.actions.map(a=>`<div class="coaching-action">→ ${a}</div>`).join('')}
-    </div>`;
-  });
-
-  el.innerHTML = `
-    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:20px">
-      ${coachKpi('Team Score',(sorted.map(([n,c])=>Math.min(100,Math.round((c/max)*80))).reduce((a,b)=>a+b,0)/Math.max(sorted.length,1)).toFixed(0)+'%','Overall health','var(--cyan)')}
-      ${coachKpi('Elite Performers',sorted.filter(([,c])=>c>=avg*1.5).length,'≥150% avg','var(--green)')}
-      ${coachKpi('Need Coaching',sorted.filter(([,c])=>c<avg*0.5).length,'<50% avg','var(--red)')}
-      ${coachKpi('Team Avg',avg.toFixed(0)+'/d','Products/designer/day','var(--amber)')}
-    </div>
-    <div style="margin-bottom:12px;font-size:.85rem;font-weight:700">Individual Coaching Plans — ${sorted.length} Designers</div>
-    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px">${cards.join('')}</div>
-  `;
+        <div class="coach-bar"><div style="height:100%;width:${score}%;border-radius:99px;background:${tier.c}"></div></div>
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin:9px 0">
+          ${[['Month',st.month||0],['Avg/Day',st.avg||0],['Days',st.activeDays||0]].map(([l,v])=>`<div style="text-align:center;background:rgba(255,255,255,0.04);border-radius:7px;padding:7px"><div style="font-size:.82rem;font-weight:700;font-family:var(--mono)">${v}</div><div style="font-size:.63rem;color:var(--muted)">${l}</div></div>`).join('')}
+        </div>
+        <div style="font-size:.68rem;color:var(--muted);margin-bottom:5px;text-transform:uppercase;letter-spacing:.07em;font-weight:600">Actions</div>
+        ${tier.a.map(a=>`<div class="coach-action">→ ${a}</div>`).join('')}
+      </div>`;
+    }).join('')}</div>`;
 }
 
-function coachKpi(label,val,sub,color){
-  return `<div class="kpi-card"><div class="kpi-label">${label}</div><div class="kpi-val" style="color:${color};font-size:1.6rem">${val}</div><div class="kpi-sub">${sub}</div></div>`;
-}
-
-/* ═══════════════════════════════════════════
-   INSIGHTS PAGE
-═══════════════════════════════════════════ */
-function renderInsightsPage() {
+function renderInsightsPage(){
   if(!rawRows.length) return;
-  const s = buildSummary(visibleRows);
-  const el = document.getElementById('insightsPageContent');
-  const insights = generateInsights(s);
-  el.innerHTML = `
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:20px">
-      <div class="card">
-        <div class="section-head"><div><h2>Output Over Time</h2><p>Products created per month</p></div></div>
-        <canvas id="insightsMonthlyChart" style="max-height:200px!important"></canvas>
-      </div>
-      <div class="card">
-        <div class="section-head"><div><h2>Status Breakdown</h2><p>Product completion states</p></div></div>
-        <canvas id="insightsStatusChart" style="max-height:200px!important"></canvas>
-      </div>
-    </div>
-    <div class="card">
-      <div class="section-head"><div><h2>All Coaching Insights</h2><p>${insights.length} observations from your data</p></div></div>
-      <div style="display:grid;gap:10px">${insights.map(i=>`<div class="insight-item ${i.type||''}" style="font-size:.85rem">${i.icon} ${i.text}</div>`).join('')}</div>
-    </div>`;
-
+  const s=buildSummary(visibleRows);
+  const el=document.getElementById('insightsPageContent');
+  el.innerHTML=`<div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:18px">
+    <div class="card"><div class="s-head"><div><h2>Monthly Output</h2></div></div><canvas id="insMo" style="max-height:180px!important"></canvas></div>
+    <div class="card"><div class="s-head"><div><h2>Status Breakdown</h2></div></div><canvas id="insSt" style="max-height:180px!important"></canvas></div>
+  </div>
+  <div class="card"><div class="s-head"><div><h2>All Insights</h2></div></div><div>${genInsights(s).map(i=>`<div class="ins-item ${i.type||''}" style="font-size:.83rem;margin-bottom:7px">${i.icon} ${i.text}</div>`).join('')}</div></div>`;
   setTimeout(()=>{
-    const mKeys=Object.keys(s.monthlyMap).slice(-12);
-    mkChart('insightsMonthlyChart','bar',mKeys,mKeys.map(k=>s.monthlyMap[k]),'Products',COLORS[0]);
+    const mo=Object.keys(s.monthlyMap).slice(-12);
+    mkChart('insMo','bar',mo,mo.map(k=>s.monthlyMap[k]),'Products',COLORS[0]);
     const sc=Object.entries(s.statusCounts).sort((a,b)=>b[1]-a[1]);
-    mkChart('insightsStatusChart','doughnut',sc.map(x=>x[0]),sc.map(x=>x[1]),'Count',COLORS);
-  },50);
+    mkChart('insSt','doughnut',sc.map(x=>x[0]),sc.map(x=>x[1]),'Count',COLORS);
+  },60);
 }
 
-/* ═══════════════════════════════════════════
-   PRODUCTS PAGE
-═══════════════════════════════════════════ */
-function renderProductsTable() {
-  const el = document.getElementById('productsTableBody');
-  if(!visibleRows.length){ el.innerHTML='<tr><td colspan="7" style="text-align:center;color:var(--muted);padding:30px">No data.</td></tr>'; return; }
-  el.innerHTML = visibleRows.slice(0,500).map(r=>`
-    <tr>
-      <td style="color:${colorFor(r.designer||'')};font-weight:600">${r.designer||'—'}</td>
-      <td style="max-width:220px;overflow:hidden;text-overflow:ellipsis">${r.product||'—'}</td>
-      <td style="font-family:var(--mono);font-size:.72rem">${r.asin||'—'}</td>
-      <td style="font-family:var(--mono);font-size:.72rem">${r.ean||'—'}</td>
-      <td>${r.brand||'—'}</td>
-      <td>${r.status?`<span class="activity-status ${statusClass(r.status)}">${r.status}</span>`:'—'}</td>
-      <td style="font-size:.78rem;color:var(--muted2)">${fmtDisplay(r.date)}</td>
-    </tr>`).join('');
+function renderProductsTable(){
+  const el=document.getElementById('productsBody');
+  if(!visibleRows.length){el.innerHTML='<tr><td colspan="7" style="text-align:center;color:var(--muted);padding:28px">No data.</td></tr>';return;}
+  el.innerHTML=visibleRows.slice(0,500).map(r=>`<tr>
+    <td style="color:${colorFor(r.designer||'')};font-weight:600">${r.designer||'—'}</td>
+    <td style="max-width:200px;overflow:hidden;text-overflow:ellipsis">${r.product||'—'}</td>
+    <td style="font-family:var(--mono);font-size:.7rem">${r.asin||'—'}</td>
+    <td style="font-family:var(--mono);font-size:.7rem">${r.ean||'—'}</td>
+    <td>${r.brand||'—'}</td>
+    <td>${r.status?`<span class="sp ${spClass(r.status)}">${r.status}</span>`:'—'}</td>
+    <td style="font-size:.76rem;color:var(--muted2)">${fmtD(r.date)}</td>
+  </tr>`).join('');
 }
 
-/* ═══════════════════════════════════════════
+/* ════════════════════════════════════════════
+   NAVIGATION
+════════════════════════════════════════════ */
+function showPage(id){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));
+  const page=document.getElementById('page-'+id);
+  if(page) page.classList.add('active');
+  const btn=document.querySelector(`[onclick="showPage('${id}')"]`);
+  if(btn) btn.classList.add('active');
+  if(id==='leaderboard') renderFullLeaderboard();
+  if(id==='coaching') renderCoachingPage();
+  if(id==='insights') renderInsightsPage();
+  if(id==='products') renderProductsTable();
+}
+
+/* ════════════════════════════════════════════
    EXPORTS
-═══════════════════════════════════════════ */
-function exportExcel() {
-  if(!visibleRows.length){ alert('No data to export.'); return; }
-  const data = [['Designer','Product (APS)','ASIN','EAN','Brand','Status','Date']];
-  visibleRows.forEach(r=>data.push([r.designer,r.product,r.asin,r.ean,r.brand,r.status,r.date?fmtDisplay(r.date):'']));
-  const ws = XLSX.utils.aoa_to_sheet(data);
-  const wb = XLSX.utils.book_new();
-  XLSX.utils.book_append_sheet(wb, ws, 'Designer Records');
-  // Summary sheet
-  const s = buildSummary(visibleRows);
-  const sumData = [['Designer','Total','This Month','This Week','Avg/Day','Active Days','Top Brand']];
-  Object.entries(s.dStats).sort((a,b)=>b[1].total-a[1].total).forEach(([name,st])=>{
-    sumData.push([name,st.total,st.month,st.week,st.avg,st.activeDays,st.topBrand]);
-  });
-  XLSX.utils.book_append_sheet(wb, XLSX.utils.aoa_to_sheet(sumData), 'Designer Summary');
-  XLSX.writeFile(wb, 'designer_performance_report.xlsx');
+════════════════════════════════════════════ */
+function exportExcel(){
+  if(!visibleRows.length){alert('No data to export.');return;}
+  const data=[['Designer','Product (APS)','ASIN','EAN','Brand','Status','Date']];
+  visibleRows.forEach(r=>data.push([r.designer,r.product,r.asin,r.ean,r.brand,r.status,r.date?fmtD(r.date):'']));
+  const ws=XLSX.utils.aoa_to_sheet(data);const wb=XLSX.utils.book_new();
+  XLSX.utils.book_append_sheet(wb,ws,'Records');
+  const s=buildSummary(visibleRows);
+  const sum=[['Designer','Total','Month','Week','Avg/Day','Active Days','Top Brand']];
+  Object.entries(s.dStats).sort((a,b)=>b[1].total-a[1].total).forEach(([n,st])=>sum.push([n,st.total,st.month,st.week,st.avg,st.activeDays,st.topBrand]));
+  XLSX.utils.book_append_sheet(wb,XLSX.utils.aoa_to_sheet(sum),'Summary');
+  XLSX.writeFile(wb,'designer_performance.xlsx');
 }
 
-function exportCsv() {
-  if(!visibleRows.length){ alert('No data.'); return; }
-  const rows = [['Designer','Product','ASIN','EAN','Brand','Status','Date']];
-  visibleRows.forEach(r=>rows.push([r.designer,r.product,r.asin,r.ean,r.brand,r.status,r.date?fmtDisplay(r.date):'']));
-  const csv = rows.map(r=>r.map(c=>`"${String(c||'').replace(/"/g,'""')}"`).join(',')).join('\n');
-  const a = document.createElement('a');
-  a.href = URL.createObjectURL(new Blob([csv],{type:'text/csv'}));
-  a.download = 'designer_report.csv'; a.click();
+function exportCsv(){
+  if(!visibleRows.length){alert('No data.');return;}
+  const rows=[['Designer','Product','ASIN','EAN','Brand','Status','Date']];
+  visibleRows.forEach(r=>rows.push([r.designer,r.product,r.asin,r.ean,r.brand,r.status,r.date?fmtD(r.date):'']));
+  const csv=rows.map(r=>r.map(c=>`"${String(c||'').replace(/"/g,'""')}"`).join(',')).join('\n');
+  const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([csv],{type:'text/csv'}));
+  a.download='designer_report.csv';a.click();
 }
 
-function exportDesignerReport() {
-  if(!selectedDesigner||!rawRows.length){ alert('Select a designer first.'); return; }
-  const rows = visibleRows.filter(r=>r.designer===selectedDesigner);
-  if(!rows.length){ alert('No records for '+selectedDesigner); return; }
-  const s = buildSummary(rows);
-  const data = [['DESIGNER PERFORMANCE REPORT'],['Designer',selectedDesigner],['Generated',new Date().toLocaleDateString()],['Total Products',rows.length],[],
-    ['Product (APS)','ASIN','EAN','Brand','Status','Date']];
-  rows.forEach(r=>data.push([r.product,r.asin,r.ean,r.brand,r.status,r.date?fmtDisplay(r.date):'']));
-  const ws = XLSX.utils.aoa_to_sheet(data);
-  const wb = XLSX.utils.book_new();
-  XLSX.utils.book_append_sheet(wb, ws, selectedDesigner.slice(0,30));
-  XLSX.writeFile(wb, `${selectedDesigner.replace(/\s+/g,'_')}_report.xlsx`);
-}
-
-/* ═══════════════════════════════════════════
-   HOOK: designer page picker when data loads
-═══════════════════════════════════════════ */
-const _origFilter = filterAndRender;
-// After data loads, also update designer picker
-const origRender = renderDashboard;
-function renderDashboard(){
-  const s = buildSummary(visibleRows);
-  renderHeroCards(s);
-  renderLeaderboard(s);
-  renderCharts(s);
-  renderRecord(s);
-  renderBottom(s);
-  renderActivity(s);
-  renderInsights(s);
-  renderPeriodKpis(s);
-  renderDetailTable(s);
-  renderDesignerPicker(s);
-  if(selectedDesigner) renderAnalysis(selectedDesigner, s);
+function exportDesignerReport(){
+  if(!selectedDesigner||!rawRows.length){alert('Select a designer first.');return;}
+  const rows=visibleRows.filter(r=>r.designer===selectedDesigner);
+  if(!rows.length){alert('No records for '+selectedDesigner);return;}
+  const data=[['DESIGNER PERFORMANCE REPORT'],['Designer',selectedDesigner],['Generated',new Date().toLocaleDateString()],['Total',rows.length],[],
+    ['Product','ASIN','EAN','Brand','Status','Date']];
+  rows.forEach(r=>data.push([r.product,r.asin,r.ean,r.brand,r.status,r.date?fmtD(r.date):'']));
+  const ws=XLSX.utils.aoa_to_sheet(data);const wb=XLSX.utils.book_new();
+  XLSX.utils.book_append_sheet(wb,ws,selectedDesigner.slice(0,30));
+  XLSX.writeFile(wb,selectedDesigner.replace(/\s+/g,'_')+'_report.xlsx');
 }
 </script>
 </body>
