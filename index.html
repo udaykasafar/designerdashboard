@@ -213,7 +213,7 @@ canvas{width:100%!important;max-height:200px!important;}
 </head>
 <body>
 <div class="login-view" id="loginView">
-  <form class="login-card" id="loginForm" onsubmit="handleLogin(event)">
+  <form class="login-card" id="loginForm">
     <div class="login-brand">
       <div class="brand-logo">DP</div>
       <div><strong>Designer Hub</strong><small>Plantex access</small></div>
@@ -539,8 +539,8 @@ canvas{width:100%!important;max-height:200px!important;}
 </div><!-- /content -->
 </div><!-- /app -->
 
-<script src="xlsx.full.min.js"></script>
-<script src="chart.umd.min.js"></script>
+<script src="xlsx.full.min.js" defer></script>
+<script src="chart.umd.min.js" defer></script>
 <script>
 /* ════════════════════════════════════════════
    GOOGLE SHEETS CONFIG — edit these two lines
@@ -549,6 +549,9 @@ const GS_API_KEY  = 'AIzaSyBxdLYQlt8rN6zuTxpebOMF60z82KXmKlY';
 const GS_SHEET_ID = '1m5KpalxI7spitUPGFN5LgSz-Go8vKkifaNfzx2UAOrE';
 const GS_RANGE    = 'plantex';  // your sheet tab name
 const GS_REFRESH_MINUTES = 5;  // auto-refresh interval
+const LOGIN_USERNAME = 'plantex';
+const LOGIN_PASSWORD = 'pltx@123';
+const AUTH_KEY = 'designerDashboardAuthenticated';
 
 /* ════════════════════════════════════════════
    GLOBALS — column mapping matches your sheet:
@@ -575,18 +578,78 @@ const ALIASES = {
 const COLORS=['#6366f1','#06b6d4','#10b981','#f59e0b','#f43f5e','#a855f7','#ec4899','#14b8a6','#f97316','#8b5cf6','#22d3ee','#84cc16'];
 
 let rawRows=[],visibleRows=[],charts={},selectedDesigner=null,sortField='date',sortDir=-1,refreshTimer=null;
+let dashboardReady=false;
 
 /* ════════════════════════════════════════════
    INIT
 ════════════════════════════════════════════ */
 document.addEventListener('DOMContentLoaded',()=>{
+  const loginForm=document.getElementById('loginForm');
+  if(loginForm) loginForm.addEventListener('submit',handleLogin);
+  if(sessionStorage.getItem(AUTH_KEY)==='yes'){
+    openDashboard();
+    return;
+  }
+  const loginUsername=document.getElementById('loginUsername');
+  if(loginUsername) loginUsername.focus();
+});
+
+function handleLogin(event){
+  event.preventDefault();
+  const username=document.getElementById('loginUsername').value.trim();
+  const password=document.getElementById('loginPassword').value;
+  const error=document.getElementById('loginError');
+  if(username===LOGIN_USERNAME && password===LOGIN_PASSWORD){
+    sessionStorage.setItem(AUTH_KEY,'yes');
+    if(error) error.textContent='';
+    openDashboard();
+    return;
+  }
+  if(error) error.textContent='Invalid username or password.';
+  const passwordInput=document.getElementById('loginPassword');
+  if(passwordInput){
+    passwordInput.value='';
+    passwordInput.focus();
+  }
+}
+
+function openDashboard(){
+  const login=document.getElementById('loginView');
+  const app=document.getElementById('appShell');
+  if(login) login.hidden=true;
+  if(app) app.classList.remove('locked');
+  initDashboard();
+}
+
+function logout(){
+  sessionStorage.removeItem(AUTH_KEY);
+  clearTimeout(refreshTimer);
+  const app=document.getElementById('appShell');
+  const login=document.getElementById('loginView');
+  if(app) app.classList.add('locked');
+  if(login) login.hidden=false;
+  const username=document.getElementById('loginUsername');
+  const password=document.getElementById('loginPassword');
+  const error=document.getElementById('loginError');
+  if(username) username.value='';
+  if(password) password.value='';
+  if(error) error.textContent='';
+  if(username) setTimeout(()=>username.focus(),0);
+}
+
+function initDashboard(){
+  if(dashboardReady){
+    loadFromGoogleSheets();
+    return;
+  }
   const dz=document.getElementById('dropZone');
   dz.addEventListener('dragover',e=>{e.preventDefault();dz.classList.add('drag-over');});
   dz.addEventListener('dragleave',()=>dz.classList.remove('drag-over'));
   dz.addEventListener('drop',e=>{e.preventDefault();dz.classList.remove('drag-over');if(e.dataTransfer.files[0])readFile(e.dataTransfer.files[0]);});
   document.getElementById('settingsSheetId').textContent=GS_SHEET_ID;
+  dashboardReady=true;
   loadFromGoogleSheets();
-});
+}
 
 function onPresetChange(){
   document.getElementById('customDateWrap').style.display=
