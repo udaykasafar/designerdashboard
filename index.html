@@ -739,43 +739,31 @@ function buildSummary(rows){
   const dCounts={},dProducts={},dBrand={},statusCounts={},brandCounts={},weeklyMap={},monthlyMap={},dayMap={};
   rows.forEach(r=>{
     const d=r.designer||'Unknown';
-    const imgs=r.images||1;
-    dCounts[d]=(dCounts[d]||0)+imgs;
+    dCounts[d]=(dCounts[d]||0)+1;
     if(!dProducts[d]) dProducts[d]=[];
     dProducts[d].push(r);
     const b=r.brand||'Unknown';
-    brandCounts[b]=(brandCounts[b]||0)+imgs;
+    brandCounts[b]=(brandCounts[b]||0)+1;
     if(!dBrand[d]) dBrand[d]={};
-    dBrand[d][b]=(dBrand[d][b]||0)+imgs;
+    dBrand[d][b]=(dBrand[d][b]||0)+1;
     if(r.status) statusCounts[r.status]=(statusCounts[r.status]||0)+1;
     if(r.date){
       const wk=weekLabel(r.date);
       const mo=r.date.toLocaleDateString('en-GB',{month:'short',year:'numeric'});
-      weeklyMap[wk]=(weeklyMap[wk]||0)+imgs;
-      monthlyMap[mo]=(monthlyMap[mo]||0)+imgs;
+      weeklyMap[wk]=(weeklyMap[wk]||0)+1;
+      monthlyMap[mo]=(monthlyMap[mo]||0)+1;
       const key=d+'|'+fmtISO(r.date);
       if(!dayMap[key]) dayMap[key]={designer:d,date:r.date,count:0,product:r.product,brand:r.brand};
-      dayMap[key].count+=imgs;
+      dayMap[key].count+=1;
     }
   });
 
-  // Use latest date in dataset as reference (not today)
-  // so weekly/monthly/yearly is relative to your actual data
   const allDatesRef=rows.filter(r=>r.date).map(r=>r.date).sort((a,b)=>b-a);
   const latestDate=allDatesRef[0]||new Date();
 
-  function topForDays(days){
-    const cut=new Date(latestDate);cut.setDate(cut.getDate()-days);
-    const c={};
-    rows.forEach(r=>{
-      if(r.date&&r.date>=cut){
-        const d=r.designer||'?';
-        c[d]=(c[d]||0)+(r.images||1);
-      }
-    });
-    const t=Object.entries(c).sort((a,b)=>b[1]-a[1])[0];
-    return t?{name:t[0],count:t[1]}:{name:'—',count:0};
-  }
+  const now=new Date();now.setHours(23,59,59,999);
+  const cut7=new Date(now);cut7.setDate(now.getDate()-7);cut7.setHours(0,0,0,0);
+  const cut30=new Date(now);cut30.setDate(now.getDate()-30);cut30.setHours(0,0,0,0);
 
   const dStats={};
   Object.keys(dCounts).forEach(d=>{
@@ -783,10 +771,8 @@ function buildSummary(rows){
     const dates=dr.filter(r=>r.date).map(r=>r.date).sort((a,b)=>a-b);
     const activeDays=new Set(dr.filter(r=>r.date).map(r=>fmtISO(r.date))).size;
     const avg=activeDays>0?(dCounts[d]/activeDays).toFixed(1):0;
-    const cut7=new Date(latestDate);cut7.setDate(cut7.getDate()-7);
-    const cut30=new Date(latestDate);cut30.setDate(cut30.getDate()-30);
-    const week=dr.filter(r=>r.date&&r.date>=cut7).reduce((s,r)=>s+(r.images||1),0);
-    const month=dr.filter(r=>r.date&&r.date>=cut30).reduce((s,r)=>s+(r.images||1),0);
+    const week=dr.filter(r=>r.date&&r.date>=cut7&&r.date<=now).length;
+    const month=dr.filter(r=>r.date&&r.date>=cut30&&r.date<=now).length;
     const topBrand=Object.entries(dBrand[d]||{}).sort((a,b)=>b[1]-a[1])[0];
     const dDayMap={};dr.forEach(r=>{if(r.date){const k=fmtISO(r.date);dDayMap[k]=(dDayMap[k]||0)+1;}});
     const bestDay=Object.entries(dDayMap).sort((a,b)=>b[1]-a[1])[0];
@@ -799,12 +785,18 @@ function buildSummary(rows){
   const allDates=rows.filter(r=>r.date).map(r=>r.date).sort((a,b)=>a-b);
   return{
     totalRows:rows.length,dCounts,dProducts,dStats,statusCounts,brandCounts,
-    topWeek:topForDays(7),topMonth:topForDays(30),topYear:topForDays(365),
     totalDesigners:Object.keys(dCounts).length,weeklyMap,monthlyMap,
     recordDay:Object.values(dayMap).sort((a,b)=>b.count-a.count)[0]||null,
     allDates,firstDate:allDates[0]||null,lastDate:allDates[allDates.length-1]||null,
     latestDate
   };
+}
+
+function topDesignerFrom(rows,filterFn){
+  const c={};
+  rows.forEach(r=>{if(r.designer&&filterFn(r)){c[r.designer]=(c[r.designer]||0)+1;}});
+  const t=Object.entries(c).sort((a,b)=>b[1]-a[1])[0];
+  return t?{name:t[0],count:t[1]}:{name:'—',count:0};
 }
 
 function weekLabel(d){const t=new Date(d);t.setDate(t.getDate()-t.getDay());return t.toLocaleDateString('en-GB',{day:'2-digit',month:'short'});}
@@ -814,21 +806,27 @@ function weekLabel(d){const t=new Date(d);t.setDate(t.getDate()-t.getDay());retu
 ════════════════════════════════════════════ */
 function renderDashboard(){
   const s=buildSummary(visibleRows);
-  // Hero
-  // Show period label relative to latest data date
-  const ld=s.latestDate||new Date();
-  const cut7=new Date(ld);cut7.setDate(cut7.getDate()-7);
-  const cut30=new Date(ld);cut30.setDate(cut30.getDate()-30);
-  const cut365=new Date(ld);cut365.setDate(cut365.getDate()-365);
+
+  // Hero cards — always from ALL raw data, using today's real calendar date
+  const now=new Date();now.setHours(23,59,59,999);
+  const wkCut=new Date(now);wkCut.setDate(now.getDate()-7);wkCut.setHours(0,0,0,0);
+  const moCut=new Date(now);moCut.setDate(now.getDate()-30);moCut.setHours(0,0,0,0);
+  const yrStart=new Date(now.getFullYear(),0,1);
+  const yrEnd=new Date(now.getFullYear(),11,31,23,59,59);
+  const heroTop={
+    Week:  topDesignerFrom(rawRows,r=>r.date&&r.date>=wkCut&&r.date<=now),
+    Month: topDesignerFrom(rawRows,r=>r.date&&r.date>=moCut&&r.date<=now),
+    Year:  topDesignerFrom(rawRows,r=>r.date&&r.date>=yrStart&&r.date<=yrEnd)
+  };
   const periodLabels={
-    Week:  fmtS(cut7)+' → '+fmtS(ld),
-    Month: fmtS(cut30)+' → '+fmtS(ld),
-    Year:  fmtS(cut365)+' → '+fmtS(ld)
+    Week:  fmtS(wkCut)+' → '+fmtS(now),
+    Month: fmtS(moCut)+' → '+fmtS(now),
+    Year:  String(now.getFullYear())
   };
   ['Week','Month','Year'].forEach(p=>{
-    const d=s['top'+p];
+    const d=heroTop[p];
     document.getElementById('top'+p+'Name').textContent=d.name;
-    document.getElementById('top'+p+'Count').textContent=d.count?d.count.toLocaleString()+' images · '+periodLabels[p]:'— (no data in period)';
+    document.getElementById('top'+p+'Count').textContent=d.count?d.count.toLocaleString()+' products · '+periodLabels[p]:'— (no data in period)';
     document.getElementById('top'+p+'Av').textContent=d.name!=='—'?initials(d.name):'—';
   });
   document.getElementById('kpiTotal').textContent=s.totalRows.toLocaleString();
